@@ -16,3 +16,8 @@ aws sso-admin create-account-assignment --instance-arn $ssoArn --target-id $acco
 printf "\n\nStart session url: https://$ssoId.awsapps.com/start\nRegion: $AWS_REGION\nUsername: terrasacha-amplify-admin\n\n"
 
 ```
+
+```sh
+aws configure sso
+aws sts get-caller-identity --profile terrasacha-amplify-admin
+```
