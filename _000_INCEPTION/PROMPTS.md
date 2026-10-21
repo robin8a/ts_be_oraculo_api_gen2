@@ -35,3 +35,6 @@ aws sso login --profile terrasacha-amplify-admin
 
 npm run sandbox --profile terrasacha-amplify-admin
 ```
+
+
+# Could you document in "REACTJS.md" how to integrate on NextJS and Tailwind the backend
