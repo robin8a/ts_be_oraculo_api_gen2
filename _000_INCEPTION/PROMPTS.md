@@ -20,4 +20,12 @@ printf "\n\nStart session url: https://$ssoId.awsapps.com/start\nRegion: $AWS_RE
 ```sh
 aws configure sso
 aws sts get-caller-identity --profile terrasacha-amplify-admin
+aws sso lo
 ```
+
+## Help to create a Amplify gen2 backend with: 
+
+- Use the aws sso profile "--profile terrasacha-amplify-admin" for example: "aws sts get-caller-identity --profile terrasacha-amplify-admin"
+- Configure the auth with User pool ID: us-east-1_D6a0Qt0RG
+- Configure the Storage with: ts-oraculo-models
+- Data from the Database desing @_000_INCEPTION/DB_ER_Oraculo_V10.drawio.png 
