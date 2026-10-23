@@ -12,6 +12,8 @@ import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
  * Auth:
  * - Cognito user pool (default): create, read, update, delete
  * - API key: read
+ * - SatelliteTopology also allows API key create, so the sandbox
+ *   admin profile can seed the catalog from stack outputs
  */
 const schema = a
   .schema({
@@ -84,7 +86,10 @@ const schema = a
         'SatelliteTopologyAnalysis',
         'satelliteTopologyId',
       ),
-    }),
+    }).authorization((allow) => [
+      allow.authenticated().to(['read', 'create', 'update', 'delete']),
+      allow.publicApiKey().to(['read', 'create']),
+    ]),
 
     SatelliteTopologyModelAI: a.model({
       satelliteTopologyId: a.id().required(),

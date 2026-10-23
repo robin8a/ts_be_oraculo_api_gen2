@@ -62,7 +62,7 @@ API name: `OraculoApi` (`amplify/data/resource.ts`).
 | Mode | Client `authMode` | Operations |
 |---|---|---|
 | Cognito user pool (default) | `userPool` | create, read, update, delete |
-| API key | `apiKey` | read |
+| API key | `apiKey` | read. `SatelliteTopology` also allows create, for the seed script |
 | IAM | `iam` | enabled for the Amplify console |
 
 The API key expires 365 days after each deploy. Redeploy to extend it.

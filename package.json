@@ -7,6 +7,8 @@
     "sandbox": "node scripts/ampx-with-sso.mjs sandbox --identifier oraculo",
     "sandbox:once": "node scripts/ampx-with-sso.mjs sandbox --once --identifier oraculo",
     "sandbox:delete": "node scripts/ampx-with-sso.mjs sandbox delete --identifier oraculo",
+    "seed:satellite-topology": "node _001_SEED/seedSatelliteTopology.js",
+    "seed:satellite-topology:dry": "node _001_SEED/seedSatelliteTopology.js --dry-run",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

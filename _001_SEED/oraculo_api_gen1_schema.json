@@ -1,0 +1,5267 @@
+type AccessDeadline {
+	id: ID!
+	subjectType: SubjectType!
+	subjectKey: String!
+	deadline: AWSDateTime!
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type AnalisisCuota {
+	id: ID!
+	nombreGrupo: String!
+	limiteDiario: Int!
+	activo: Boolean!
+	creadoEn: AWSDateTime
+	actualizadoEn: AWSDateTime
+	usosDiarios(
+		filter: ModelAnalisisCuotasUsoDiarioFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelAnalisisCuotasUsoDiarioConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type AnalisisCuotasUsoDiario {
+	id: ID!
+	usuarioNombre: String!
+	grupoId: ID!
+	fechaUso: AWSDateTime!
+	consultaId: ID!
+	creadoEn: AWSDateTime
+	consulta: ConsultaAnalisis
+	grupo: AnalisisCuota
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ApiCredential {
+	id: ID!
+	name: String!
+	apiKeyHash: String!
+	active: Boolean!
+	allowedIps: String
+	expiresAt: AWSDateTime
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type Calculation {
+	id: ID!
+	polygon: AWSJSON!
+	start_date: AWSTimestamp!
+	end_date: AWSTimestamp!
+	satellite_TIF: AWSURL!
+	result_TIF: AWSURL!
+	result_PNG: AWSURL!
+	is_to_block_chain: Boolean!
+	modelAI: ModelAI
+	user: User
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	modelAICalculationsId: ID
+	userCalculationsId: ID
+}
+
+type ConstructorFormula {
+	id: ID!
+	nombre: String!
+	descripcion: String!
+	fuente: String
+	usuarioId: String
+	tipoFormula: TipoFormula!
+	estado: Boolean!
+	expresionJson: AWSJSON
+	fechaCreacion: AWSDateTime
+	version: Int!
+	versionActiva: Boolean!
+	variables(
+		filter: ModelConstructorFormulaVariableRelFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaVariableRelConnection
+	teledeteccion(
+		filter: ModelFormulaTeledeteccionFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelFormulaTeledeteccionConnection
+	deepLearning(
+		filter: ModelFormulaDeepLearningFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelFormulaDeepLearningConnection
+	historial(
+		filter: ModelFormulaHistorialFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelFormulaHistorialConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ConstructorFormulaCategoria {
+	id: ID!
+	nombre: String!
+	estado: Boolean!
+	variables(
+		filter: ModelConstructorFormulaVariableFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaVariableConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ConstructorFormulaVariable {
+	id: ID!
+	nombre: String!
+	simbolo: String!
+	unidades: String!
+	descripcion: String!
+	categoriaId: ID
+	estado: Boolean!
+	categoria: ConstructorFormulaCategoria
+	formulas(
+		filter: ModelConstructorFormulaVariableRelFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaVariableRelConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ConstructorFormulaVariableRel {
+	id: ID!
+	formulaId: ID!
+	variableId: ID!
+	formula: ConstructorFormula
+	variable: ConstructorFormulaVariable
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ConsultaAnalisis {
+	id: ID!
+	proyectoId: ID
+	consultaNombre: String!
+	consultaUbicacion: String!
+	consultaParametros: AWSJSON
+	consultaExternaPoligonos: AWSJSON
+	consultaIdExterna: String
+	respuestaResultado: AWSJSON
+	respuestaIdentificadorExterno: String
+	modeloId: String
+	modeloName: String
+	modeloDescription: String
+	modeloVersion: String
+	modeloDocumentLink: String
+	modeloApiLink: String
+	blockchainHashTransaccion: String
+	fechaCreacion: AWSDateTime
+	source: SourceType!
+	proyecto: Proyecto
+	estados(
+		filter: ModelConsultaEstadoFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaEstadoConnection
+	cuotasUso(
+		filter: ModelAnalisisCuotasUsoDiarioFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelAnalisisCuotasUsoDiarioConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ConsultaApi {
+	id: ID!
+	projectID: String
+	cedulaCatastral: String
+	imgAnteriorNombreImg: String
+	imgAnteriorSatellite: String
+	imgAnteriorYear: Int
+	imgAnteriorMesInicial: Int
+	imgAnteriorMesFinal: Int
+	imgAnteriorNubosidadMaxima: Int
+	imgAnteriorBandas: String
+	imgPosteriorNombreImg: String
+	imgPosteriorSatellite: String
+	imgPosteriorYear: Int
+	imgPosteriorMesInicial: Int
+	imgPosteriorMesFinal: Int
+	imgPosteriorNubosidadMaxima: Int
+	imgPosteriorBandas: String
+	fechaHoraConsulta: AWSDateTime
+	fechaHoraActualizacion: AWSDateTime
+	usuarioEmailUpdate: String
+	verificado: Boolean!
+	rawConsulta: AWSJSON
+	resultadoConsulta: AWSJSON
+	hashBlockchain: String
+	indexNumberBlockchain: Int
+	timestampBlockchain: AWSDateTime
+	onchainBlockchain: Boolean!
+	txIdBlockchain: String
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ConsultaEstado {
+	id: ID!
+	consultaId: ID!
+	estado: EstadoConsulta!
+	estadoFecha: AWSDateTime!
+	estadoUsername: String
+	estadoObservaciones: String
+	estadoTipoActor: EstadoTipoActor!
+	consulta: ConsultaAnalisis
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ConsultaWeb {
+	id: ID!
+	projectID: ID
+	imgAnteriorNombreImg: String
+	imgAnteriorSatellite: String
+	imgAnteriorYear: Int
+	imgAnteriorMesInicial: Int
+	imgAnteriorMesFinal: Int
+	imgAnteriorNubosidadMaxima: Int
+	imgAnteriorBandas: String
+	imgPosteriorNombreImg: String
+	imgPosteriorSatellite: String
+	imgPosteriorYear: Int
+	imgPosteriorMesInicial: Int
+	imgPosteriorMesFinal: Int
+	imgPosteriorNubosidadMaxima: Int
+	imgPosteriorBandas: String
+	fechaHoraConsulta: AWSDateTime
+	usuarioEmailUpdate: String
+	rawConsulta: AWSJSON
+	resultadoConsulta: AWSJSON
+	proyecto: ProyectoLegacy
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+input CreateAccessDeadlineInput {
+	id: ID
+	subjectType: SubjectType!
+	subjectKey: String!
+	deadline: AWSDateTime!
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	_version: Int
+}
+
+input CreateAnalisisCuotaInput {
+	id: ID
+	nombreGrupo: String!
+	limiteDiario: Int!
+	activo: Boolean!
+	creadoEn: AWSDateTime
+	actualizadoEn: AWSDateTime
+	_version: Int
+}
+
+input CreateAnalisisCuotasUsoDiarioInput {
+	id: ID
+	usuarioNombre: String!
+	grupoId: ID!
+	fechaUso: AWSDateTime!
+	consultaId: ID!
+	creadoEn: AWSDateTime
+	_version: Int
+}
+
+input CreateApiCredentialInput {
+	id: ID
+	name: String!
+	apiKeyHash: String!
+	active: Boolean!
+	allowedIps: String
+	expiresAt: AWSDateTime
+	createdAt: AWSDateTime
+	_version: Int
+}
+
+input CreateCalculationInput {
+	id: ID
+	polygon: AWSJSON!
+	start_date: AWSTimestamp!
+	end_date: AWSTimestamp!
+	satellite_TIF: AWSURL!
+	result_TIF: AWSURL!
+	result_PNG: AWSURL!
+	is_to_block_chain: Boolean!
+	_version: Int
+	modelAICalculationsId: ID
+	userCalculationsId: ID
+}
+
+input CreateConstructorFormulaCategoriaInput {
+	id: ID
+	nombre: String!
+	estado: Boolean!
+	_version: Int
+}
+
+input CreateConstructorFormulaInput {
+	id: ID
+	nombre: String!
+	descripcion: String!
+	fuente: String
+	usuarioId: String
+	tipoFormula: TipoFormula!
+	estado: Boolean!
+	expresionJson: AWSJSON
+	fechaCreacion: AWSDateTime
+	version: Int!
+	versionActiva: Boolean!
+	_version: Int
+}
+
+input CreateConstructorFormulaVariableInput {
+	id: ID
+	nombre: String!
+	simbolo: String!
+	unidades: String!
+	descripcion: String!
+	categoriaId: ID
+	estado: Boolean!
+	_version: Int
+}
+
+input CreateConstructorFormulaVariableRelInput {
+	id: ID
+	formulaId: ID!
+	variableId: ID!
+	_version: Int
+}
+
+input CreateConsultaAnalisisInput {
+	id: ID
+	proyectoId: ID
+	consultaNombre: String!
+	consultaUbicacion: String!
+	consultaParametros: AWSJSON
+	consultaExternaPoligonos: AWSJSON
+	consultaIdExterna: String
+	respuestaResultado: AWSJSON
+	respuestaIdentificadorExterno: String
+	modeloId: String
+	modeloName: String
+	modeloDescription: String
+	modeloVersion: String
+	modeloDocumentLink: String
+	modeloApiLink: String
+	blockchainHashTransaccion: String
+	fechaCreacion: AWSDateTime
+	source: SourceType!
+	_version: Int
+}
+
+input CreateConsultaApiInput {
+	id: ID
+	projectID: String
+	cedulaCatastral: String
+	imgAnteriorNombreImg: String
+	imgAnteriorSatellite: String
+	imgAnteriorYear: Int
+	imgAnteriorMesInicial: Int
+	imgAnteriorMesFinal: Int
+	imgAnteriorNubosidadMaxima: Int
+	imgAnteriorBandas: String
+	imgPosteriorNombreImg: String
+	imgPosteriorSatellite: String
+	imgPosteriorYear: Int
+	imgPosteriorMesInicial: Int
+	imgPosteriorMesFinal: Int
+	imgPosteriorNubosidadMaxima: Int
+	imgPosteriorBandas: String
+	fechaHoraConsulta: AWSDateTime
+	fechaHoraActualizacion: AWSDateTime
+	usuarioEmailUpdate: String
+	verificado: Boolean!
+	rawConsulta: AWSJSON
+	resultadoConsulta: AWSJSON
+	hashBlockchain: String
+	indexNumberBlockchain: Int
+	timestampBlockchain: AWSDateTime
+	onchainBlockchain: Boolean!
+	txIdBlockchain: String
+	_version: Int
+}
+
+input CreateConsultaEstadoInput {
+	id: ID
+	consultaId: ID!
+	estado: EstadoConsulta!
+	estadoFecha: AWSDateTime!
+	estadoUsername: String
+	estadoObservaciones: String
+	estadoTipoActor: EstadoTipoActor!
+	_version: Int
+}
+
+input CreateConsultaWebInput {
+	id: ID
+	projectID: ID
+	imgAnteriorNombreImg: String
+	imgAnteriorSatellite: String
+	imgAnteriorYear: Int
+	imgAnteriorMesInicial: Int
+	imgAnteriorMesFinal: Int
+	imgAnteriorNubosidadMaxima: Int
+	imgAnteriorBandas: String
+	imgPosteriorNombreImg: String
+	imgPosteriorSatellite: String
+	imgPosteriorYear: Int
+	imgPosteriorMesInicial: Int
+	imgPosteriorMesFinal: Int
+	imgPosteriorNubosidadMaxima: Int
+	imgPosteriorBandas: String
+	fechaHoraConsulta: AWSDateTime
+	usuarioEmailUpdate: String
+	rawConsulta: AWSJSON
+	resultadoConsulta: AWSJSON
+	_version: Int
+}
+
+input CreateDispositivoIotInput {
+	id: ID
+	deviceId: String!
+	nombre: String!
+	departamento: String!
+	zona: String!
+	tipoDispositivo: TipoDispositivo!
+	variablesPublicadas: AWSJSON!
+	localizacion: AWSJSON
+	estado: EstadoDispositivo!
+	observaciones: String
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	_version: Int
+}
+
+input CreateFeatureInput {
+	id: ID
+	feature_type: String
+	name: String!
+	description: String
+	feature_group: String
+	default_value: Float
+	is_float: Boolean
+	_version: Int
+	unitOfMeasureFeaturesId: ID
+}
+
+input CreateFormulaDeepLearningInput {
+	id: ID
+	formulaId: ID!
+	rutaModelo: String!
+	rutaEtiquetas: String!
+	parametrosJson: AWSJSON
+	_version: Int
+}
+
+input CreateFormulaHistorialInput {
+	id: ID
+	formulaId: ID!
+	version: Int!
+	fechaModificacion: AWSDateTime
+	datosJson: AWSJSON!
+	usuarioId: String
+	_version: Int
+}
+
+input CreateFormulaTeledeteccionInput {
+	id: ID
+	formulaId: ID!
+	codigoScript: String!
+	tipoEntrada: String!
+	parametrosJson: AWSJSON
+	_version: Int
+}
+
+input CreateGrupoIotInput {
+	id: ID
+	nombre: String!
+	descripcion: String
+	estado: EstadoDispositivo!
+	usuarioCreador: String
+	observaciones: String
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	_version: Int
+}
+
+input CreateIotSessionInput {
+	id: ID
+	sessionId: String!
+	iotData: String!
+	createdAt: AWSDateTime
+	expiresAt: AWSDateTime!
+	_version: Int
+}
+
+input CreateMedicionIotInput {
+	id: ID
+	dispositivoId: ID!
+	deviceId: String!
+	departamento: String!
+	zona: String!
+	variable: String!
+	valor: Float!
+	timestamp: AWSDateTime!
+	_version: Int
+}
+
+input CreateModelAIInput {
+	id: ID
+	group: String
+	name: String!
+	description: String!
+	version: String!
+	document_link: String!
+	is_latest: Boolean!
+	api_link: String!
+	is_approved: Boolean!
+	tokens_cost: Int!
+	cost_tokens: Int!
+	_version: Int
+	modelAIModelAIsId: ID
+}
+
+input CreateModelPackageInput {
+	id: ID
+	tokenAmount: Int!
+	_version: Int
+}
+
+input CreatePermVersionInput {
+	id: ID
+	updatedAt: AWSDateTime
+	_version: Int
+}
+
+input CreateProjectInput {
+	id: ID
+	name: String!
+	status: String!
+	_version: Int
+}
+
+input CreateProyectoInput {
+	id: ID
+	proyectoNombre: String!
+	proyectoDescripcion: String
+	proyectoIdExterno: String
+	proyectoActivo: Boolean!
+	proyectoFechaCreacion: AWSDateTime
+	proyectoFechaActualizacion: AWSDateTime
+	_version: Int
+}
+
+input CreateProyectoLegacyInput {
+	id: ID
+	projectId: String!
+	descripcion: String
+	_version: Int
+}
+
+input CreateRawDataInput {
+	id: ID
+	name: String
+	valueFloat: Float
+	valueString: String
+	start_date: AWSDateTime
+	end_date: AWSDateTime
+	_version: Int
+	treeRawDataId: ID
+	featureRawDatasId: ID
+}
+
+input CreateRelDispositivoGrupoIotInput {
+	id: ID
+	dispositivoId: ID!
+	grupoId: ID!
+	fechaAsignacion: AWSDateTime
+	usuarioId: String
+	notas: String
+	_version: Int
+}
+
+input CreateRelGrupoIotProyectoInput {
+	id: ID
+	grupoId: ID!
+	proyectoId: ID!
+	fechaAsignacion: AWSDateTime
+	usuarioId: String
+	notas: String
+	_version: Int
+}
+
+input CreateRoutePermissionInput {
+	id: ID
+	subjectType: SubjectType!
+	subjectKey: String!
+	tagName: String!
+	method: String!
+	allow: Boolean!
+	createdAt: AWSDateTime
+	_version: Int
+}
+
+input CreateSatelliteTopologyInput {
+	id: ID
+	type: String!
+	name: String!
+	description: String!
+	_version: Int
+	satelliteTopologySatelliteTopologiesId: ID
+}
+
+input CreateSatelliteTopologyModelAIInput {
+	id: ID
+	_version: Int
+	satelliteTopologySatelliteTopologyModelAIsId: ID
+	modelAISatelliteTopologyModelAIsId: ID
+}
+
+input CreateTemplateFeatureInput {
+	id: ID
+	_version: Int
+	templateTemplateFeaturesId: ID
+	featureTemplateFeaturesId: ID
+}
+
+input CreateTemplateInput {
+	id: ID
+	name: String!
+	description: String
+	type: Int!
+	version: String
+	is_latest: Boolean!
+	_version: Int
+	templateTemplatesId: ID
+}
+
+input CreateTopologyInput {
+	id: ID
+	name: String!
+	string_code: String
+	number_code: String
+	status: String
+	polygon: AWSJSON
+	_version: Int
+	projectTopologiesId: ID
+	topologyTopologiesId: ID
+}
+
+input CreateTopologyTreeInput {
+	id: ID
+	_version: Int
+	treeTopologyTreesId: ID
+	topologyTopologyTreesId: ID
+}
+
+input CreateTreeInput {
+	id: ID
+	name: String!
+	are_audios_processed: Boolean
+	status: String
+	_version: Int
+	projectTreesId: ID
+	templateTreesId: ID
+}
+
+input CreateUnitOfMeasureInput {
+	id: ID
+	name: String!
+	abbreviation: String
+	_version: Int
+}
+
+input CreateUserInput {
+	id: ID
+	departamento: String
+	municipio: String
+	_version: Int
+}
+
+input CreateUserModelPackageInput {
+	id: ID
+	_version: Int
+	userUser_model_packagesId: ID
+	modelPackageUser_model_packagesId: ID
+}
+
+input DeleteAccessDeadlineInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteAnalisisCuotaInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteAnalisisCuotasUsoDiarioInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteApiCredentialInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteCalculationInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteConstructorFormulaCategoriaInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteConstructorFormulaInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteConstructorFormulaVariableInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteConstructorFormulaVariableRelInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteConsultaAnalisisInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteConsultaApiInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteConsultaEstadoInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteConsultaWebInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteDispositivoIotInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteFeatureInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteFormulaDeepLearningInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteFormulaHistorialInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteFormulaTeledeteccionInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteGrupoIotInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteIotSessionInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteMedicionIotInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteModelAIInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteModelPackageInput {
+	id: ID!
+	_version: Int
+}
+
+input DeletePermVersionInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteProjectInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteProyectoInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteProyectoLegacyInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteRawDataInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteRelDispositivoGrupoIotInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteRelGrupoIotProyectoInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteRoutePermissionInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteSatelliteTopologyInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteSatelliteTopologyModelAIInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteTemplateFeatureInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteTemplateInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteTopologyInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteTopologyTreeInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteTreeInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteUnitOfMeasureInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteUserInput {
+	id: ID!
+	_version: Int
+}
+
+input DeleteUserModelPackageInput {
+	id: ID!
+	_version: Int
+}
+
+type DispositivoIot {
+	id: ID!
+	deviceId: String!
+	nombre: String!
+	departamento: String!
+	zona: String!
+	tipoDispositivo: TipoDispositivo!
+	variablesPublicadas: AWSJSON!
+	localizacion: AWSJSON
+	estado: EstadoDispositivo!
+	observaciones: String
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	grupos(
+		filter: ModelRelDispositivoGrupoIotFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelRelDispositivoGrupoIotConnection
+	mediciones(
+		filter: ModelMedicionIotFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelMedicionIotConnection
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+enum EstadoConsulta {
+	REGISTRADO
+	PROCESANDO
+	COMPLETADO
+	CERTIFICADO_BLOCKCHAIN
+	ERROR
+}
+
+enum EstadoDispositivo {
+	ACTIVO
+	INACTIVO
+	MANTENIMIENTO
+	ERROR
+}
+
+enum EstadoTipoActor {
+	USER
+	SYSTEM
+	API_CLIENT
+}
+
+type Feature {
+	id: ID!
+	feature_type: String
+	name: String!
+	description: String
+	feature_group: String
+	default_value: Float
+	is_float: Boolean
+	unitOfMeasure: UnitOfMeasure
+	templateFeatures(
+		filter: ModelTemplateFeatureFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTemplateFeatureConnection
+	rawDatas(
+		filter: ModelRawDataFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelRawDataConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	unitOfMeasureFeaturesId: ID
+}
+
+type FormulaDeepLearning {
+	id: ID!
+	formulaId: ID!
+	rutaModelo: String!
+	rutaEtiquetas: String!
+	parametrosJson: AWSJSON
+	formula: ConstructorFormula
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type FormulaHistorial {
+	id: ID!
+	formulaId: ID!
+	version: Int!
+	fechaModificacion: AWSDateTime
+	datosJson: AWSJSON!
+	usuarioId: String
+	formula: ConstructorFormula
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type FormulaTeledeteccion {
+	id: ID!
+	formulaId: ID!
+	codigoScript: String!
+	tipoEntrada: String!
+	parametrosJson: AWSJSON
+	formula: ConstructorFormula
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type GrupoIot {
+	id: ID!
+	nombre: String!
+	descripcion: String
+	estado: EstadoDispositivo!
+	usuarioCreador: String
+	observaciones: String
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	dispositivos(
+		filter: ModelRelDispositivoGrupoIotFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelRelDispositivoGrupoIotConnection
+	proyectos(
+		filter: ModelRelGrupoIotProyectoFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelRelGrupoIotProyectoConnection
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type IotSession {
+	id: ID!
+	sessionId: String!
+	iotData: String!
+	createdAt: AWSDateTime
+	expiresAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type MedicionIot {
+	id: ID!
+	dispositivoId: ID!
+	deviceId: String!
+	departamento: String!
+	zona: String!
+	variable: String!
+	valor: Float!
+	timestamp: AWSDateTime!
+	dispositivo: DispositivoIot
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ModelAI {
+	id: ID!
+	group: String
+	name: String!
+	description: String!
+	version: String!
+	document_link: String!
+	is_latest: Boolean!
+	api_link: String!
+	is_approved: Boolean!
+	tokens_cost: Int!
+	cost_tokens: Int!
+	modelAIParent: ModelAI
+	modelAIs(
+		filter: ModelModelAIFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelModelAIConnection
+	calculations(
+		filter: ModelCalculationFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelCalculationConnection
+	satelliteTopologyModelAIs(
+		filter: ModelSatelliteTopologyModelAIFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelSatelliteTopologyModelAIConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	modelAIModelAIsId: ID
+}
+
+input ModelAccessDeadlineConditionInput {
+	subjectType: ModelSubjectTypeInput
+	subjectKey: ModelStringInput
+	deadline: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelAccessDeadlineConditionInput]
+	or: [ModelAccessDeadlineConditionInput]
+	not: ModelAccessDeadlineConditionInput
+	_deleted: ModelBooleanInput
+}
+
+type ModelAccessDeadlineConnection {
+	items: [AccessDeadline]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelAccessDeadlineFilterInput {
+	id: ModelIDInput
+	subjectType: ModelSubjectTypeInput
+	subjectKey: ModelStringInput
+	deadline: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelAccessDeadlineFilterInput]
+	or: [ModelAccessDeadlineFilterInput]
+	not: ModelAccessDeadlineFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelAnalisisCuotaConditionInput {
+	nombreGrupo: ModelStringInput
+	limiteDiario: ModelIntInput
+	activo: ModelBooleanInput
+	creadoEn: ModelStringInput
+	actualizadoEn: ModelStringInput
+	and: [ModelAnalisisCuotaConditionInput]
+	or: [ModelAnalisisCuotaConditionInput]
+	not: ModelAnalisisCuotaConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelAnalisisCuotaConnection {
+	items: [AnalisisCuota]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelAnalisisCuotaFilterInput {
+	id: ModelIDInput
+	nombreGrupo: ModelStringInput
+	limiteDiario: ModelIntInput
+	activo: ModelBooleanInput
+	creadoEn: ModelStringInput
+	actualizadoEn: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelAnalisisCuotaFilterInput]
+	or: [ModelAnalisisCuotaFilterInput]
+	not: ModelAnalisisCuotaFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelAnalisisCuotasUsoDiarioConditionInput {
+	usuarioNombre: ModelStringInput
+	grupoId: ModelIDInput
+	fechaUso: ModelStringInput
+	consultaId: ModelIDInput
+	creadoEn: ModelStringInput
+	and: [ModelAnalisisCuotasUsoDiarioConditionInput]
+	or: [ModelAnalisisCuotasUsoDiarioConditionInput]
+	not: ModelAnalisisCuotasUsoDiarioConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelAnalisisCuotasUsoDiarioConnection {
+	items: [AnalisisCuotasUsoDiario]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelAnalisisCuotasUsoDiarioFilterInput {
+	id: ModelIDInput
+	usuarioNombre: ModelStringInput
+	grupoId: ModelIDInput
+	fechaUso: ModelStringInput
+	consultaId: ModelIDInput
+	creadoEn: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelAnalisisCuotasUsoDiarioFilterInput]
+	or: [ModelAnalisisCuotasUsoDiarioFilterInput]
+	not: ModelAnalisisCuotasUsoDiarioFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelApiCredentialConditionInput {
+	name: ModelStringInput
+	apiKeyHash: ModelStringInput
+	active: ModelBooleanInput
+	allowedIps: ModelStringInput
+	expiresAt: ModelStringInput
+	createdAt: ModelStringInput
+	and: [ModelApiCredentialConditionInput]
+	or: [ModelApiCredentialConditionInput]
+	not: ModelApiCredentialConditionInput
+	_deleted: ModelBooleanInput
+	updatedAt: ModelStringInput
+}
+
+type ModelApiCredentialConnection {
+	items: [ApiCredential]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelApiCredentialFilterInput {
+	id: ModelIDInput
+	name: ModelStringInput
+	apiKeyHash: ModelStringInput
+	active: ModelBooleanInput
+	allowedIps: ModelStringInput
+	expiresAt: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelApiCredentialFilterInput]
+	or: [ModelApiCredentialFilterInput]
+	not: ModelApiCredentialFilterInput
+	_deleted: ModelBooleanInput
+}
+
+enum ModelAttributeTypes {
+	binary
+	binarySet
+	bool
+	list
+	map
+	number
+	numberSet
+	string
+	stringSet
+	_null
+}
+
+input ModelBooleanInput {
+	ne: Boolean
+	eq: Boolean
+	attributeExists: Boolean
+	attributeType: ModelAttributeTypes
+}
+
+input ModelCalculationConditionInput {
+	polygon: ModelStringInput
+	start_date: ModelIntInput
+	end_date: ModelIntInput
+	satellite_TIF: ModelStringInput
+	result_TIF: ModelStringInput
+	result_PNG: ModelStringInput
+	is_to_block_chain: ModelBooleanInput
+	and: [ModelCalculationConditionInput]
+	or: [ModelCalculationConditionInput]
+	not: ModelCalculationConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	modelAICalculationsId: ModelIDInput
+	userCalculationsId: ModelIDInput
+}
+
+type ModelCalculationConnection {
+	items: [Calculation]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelCalculationFilterInput {
+	id: ModelIDInput
+	polygon: ModelStringInput
+	start_date: ModelIntInput
+	end_date: ModelIntInput
+	satellite_TIF: ModelStringInput
+	result_TIF: ModelStringInput
+	result_PNG: ModelStringInput
+	is_to_block_chain: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelCalculationFilterInput]
+	or: [ModelCalculationFilterInput]
+	not: ModelCalculationFilterInput
+	_deleted: ModelBooleanInput
+	modelAICalculationsId: ModelIDInput
+	userCalculationsId: ModelIDInput
+}
+
+input ModelConstructorFormulaCategoriaConditionInput {
+	nombre: ModelStringInput
+	estado: ModelBooleanInput
+	and: [ModelConstructorFormulaCategoriaConditionInput]
+	or: [ModelConstructorFormulaCategoriaConditionInput]
+	not: ModelConstructorFormulaCategoriaConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelConstructorFormulaCategoriaConnection {
+	items: [ConstructorFormulaCategoria]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelConstructorFormulaCategoriaFilterInput {
+	id: ModelIDInput
+	nombre: ModelStringInput
+	estado: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelConstructorFormulaCategoriaFilterInput]
+	or: [ModelConstructorFormulaCategoriaFilterInput]
+	not: ModelConstructorFormulaCategoriaFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelConstructorFormulaConditionInput {
+	nombre: ModelStringInput
+	descripcion: ModelStringInput
+	fuente: ModelStringInput
+	usuarioId: ModelStringInput
+	tipoFormula: ModelTipoFormulaInput
+	estado: ModelBooleanInput
+	expresionJson: ModelStringInput
+	fechaCreacion: ModelStringInput
+	version: ModelIntInput
+	versionActiva: ModelBooleanInput
+	and: [ModelConstructorFormulaConditionInput]
+	or: [ModelConstructorFormulaConditionInput]
+	not: ModelConstructorFormulaConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelConstructorFormulaConnection {
+	items: [ConstructorFormula]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelConstructorFormulaFilterInput {
+	id: ModelIDInput
+	nombre: ModelStringInput
+	descripcion: ModelStringInput
+	fuente: ModelStringInput
+	usuarioId: ModelStringInput
+	tipoFormula: ModelTipoFormulaInput
+	estado: ModelBooleanInput
+	expresionJson: ModelStringInput
+	fechaCreacion: ModelStringInput
+	version: ModelIntInput
+	versionActiva: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelConstructorFormulaFilterInput]
+	or: [ModelConstructorFormulaFilterInput]
+	not: ModelConstructorFormulaFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelConstructorFormulaVariableConditionInput {
+	nombre: ModelStringInput
+	simbolo: ModelStringInput
+	unidades: ModelStringInput
+	descripcion: ModelStringInput
+	categoriaId: ModelIDInput
+	estado: ModelBooleanInput
+	and: [ModelConstructorFormulaVariableConditionInput]
+	or: [ModelConstructorFormulaVariableConditionInput]
+	not: ModelConstructorFormulaVariableConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelConstructorFormulaVariableConnection {
+	items: [ConstructorFormulaVariable]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelConstructorFormulaVariableFilterInput {
+	id: ModelIDInput
+	nombre: ModelStringInput
+	simbolo: ModelStringInput
+	unidades: ModelStringInput
+	descripcion: ModelStringInput
+	categoriaId: ModelIDInput
+	estado: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelConstructorFormulaVariableFilterInput]
+	or: [ModelConstructorFormulaVariableFilterInput]
+	not: ModelConstructorFormulaVariableFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelConstructorFormulaVariableRelConditionInput {
+	formulaId: ModelIDInput
+	variableId: ModelIDInput
+	and: [ModelConstructorFormulaVariableRelConditionInput]
+	or: [ModelConstructorFormulaVariableRelConditionInput]
+	not: ModelConstructorFormulaVariableRelConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelConstructorFormulaVariableRelConnection {
+	items: [ConstructorFormulaVariableRel]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelConstructorFormulaVariableRelFilterInput {
+	id: ModelIDInput
+	formulaId: ModelIDInput
+	variableId: ModelIDInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelConstructorFormulaVariableRelFilterInput]
+	or: [ModelConstructorFormulaVariableRelFilterInput]
+	not: ModelConstructorFormulaVariableRelFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelConsultaAnalisisConditionInput {
+	proyectoId: ModelIDInput
+	consultaNombre: ModelStringInput
+	consultaUbicacion: ModelStringInput
+	consultaParametros: ModelStringInput
+	consultaExternaPoligonos: ModelStringInput
+	consultaIdExterna: ModelStringInput
+	respuestaResultado: ModelStringInput
+	respuestaIdentificadorExterno: ModelStringInput
+	modeloId: ModelStringInput
+	modeloName: ModelStringInput
+	modeloDescription: ModelStringInput
+	modeloVersion: ModelStringInput
+	modeloDocumentLink: ModelStringInput
+	modeloApiLink: ModelStringInput
+	blockchainHashTransaccion: ModelStringInput
+	fechaCreacion: ModelStringInput
+	source: ModelSourceTypeInput
+	and: [ModelConsultaAnalisisConditionInput]
+	or: [ModelConsultaAnalisisConditionInput]
+	not: ModelConsultaAnalisisConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelConsultaAnalisisConnection {
+	items: [ConsultaAnalisis]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelConsultaAnalisisFilterInput {
+	id: ModelIDInput
+	proyectoId: ModelIDInput
+	consultaNombre: ModelStringInput
+	consultaUbicacion: ModelStringInput
+	consultaParametros: ModelStringInput
+	consultaExternaPoligonos: ModelStringInput
+	consultaIdExterna: ModelStringInput
+	respuestaResultado: ModelStringInput
+	respuestaIdentificadorExterno: ModelStringInput
+	modeloId: ModelStringInput
+	modeloName: ModelStringInput
+	modeloDescription: ModelStringInput
+	modeloVersion: ModelStringInput
+	modeloDocumentLink: ModelStringInput
+	modeloApiLink: ModelStringInput
+	blockchainHashTransaccion: ModelStringInput
+	fechaCreacion: ModelStringInput
+	source: ModelSourceTypeInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelConsultaAnalisisFilterInput]
+	or: [ModelConsultaAnalisisFilterInput]
+	not: ModelConsultaAnalisisFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelConsultaApiConditionInput {
+	projectID: ModelStringInput
+	cedulaCatastral: ModelStringInput
+	imgAnteriorNombreImg: ModelStringInput
+	imgAnteriorSatellite: ModelStringInput
+	imgAnteriorYear: ModelIntInput
+	imgAnteriorMesInicial: ModelIntInput
+	imgAnteriorMesFinal: ModelIntInput
+	imgAnteriorNubosidadMaxima: ModelIntInput
+	imgAnteriorBandas: ModelStringInput
+	imgPosteriorNombreImg: ModelStringInput
+	imgPosteriorSatellite: ModelStringInput
+	imgPosteriorYear: ModelIntInput
+	imgPosteriorMesInicial: ModelIntInput
+	imgPosteriorMesFinal: ModelIntInput
+	imgPosteriorNubosidadMaxima: ModelIntInput
+	imgPosteriorBandas: ModelStringInput
+	fechaHoraConsulta: ModelStringInput
+	fechaHoraActualizacion: ModelStringInput
+	usuarioEmailUpdate: ModelStringInput
+	verificado: ModelBooleanInput
+	rawConsulta: ModelStringInput
+	resultadoConsulta: ModelStringInput
+	hashBlockchain: ModelStringInput
+	indexNumberBlockchain: ModelIntInput
+	timestampBlockchain: ModelStringInput
+	onchainBlockchain: ModelBooleanInput
+	txIdBlockchain: ModelStringInput
+	and: [ModelConsultaApiConditionInput]
+	or: [ModelConsultaApiConditionInput]
+	not: ModelConsultaApiConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelConsultaApiConnection {
+	items: [ConsultaApi]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelConsultaApiFilterInput {
+	id: ModelIDInput
+	projectID: ModelStringInput
+	cedulaCatastral: ModelStringInput
+	imgAnteriorNombreImg: ModelStringInput
+	imgAnteriorSatellite: ModelStringInput
+	imgAnteriorYear: ModelIntInput
+	imgAnteriorMesInicial: ModelIntInput
+	imgAnteriorMesFinal: ModelIntInput
+	imgAnteriorNubosidadMaxima: ModelIntInput
+	imgAnteriorBandas: ModelStringInput
+	imgPosteriorNombreImg: ModelStringInput
+	imgPosteriorSatellite: ModelStringInput
+	imgPosteriorYear: ModelIntInput
+	imgPosteriorMesInicial: ModelIntInput
+	imgPosteriorMesFinal: ModelIntInput
+	imgPosteriorNubosidadMaxima: ModelIntInput
+	imgPosteriorBandas: ModelStringInput
+	fechaHoraConsulta: ModelStringInput
+	fechaHoraActualizacion: ModelStringInput
+	usuarioEmailUpdate: ModelStringInput
+	verificado: ModelBooleanInput
+	rawConsulta: ModelStringInput
+	resultadoConsulta: ModelStringInput
+	hashBlockchain: ModelStringInput
+	indexNumberBlockchain: ModelIntInput
+	timestampBlockchain: ModelStringInput
+	onchainBlockchain: ModelBooleanInput
+	txIdBlockchain: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelConsultaApiFilterInput]
+	or: [ModelConsultaApiFilterInput]
+	not: ModelConsultaApiFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelConsultaEstadoConditionInput {
+	consultaId: ModelIDInput
+	estado: ModelEstadoConsultaInput
+	estadoFecha: ModelStringInput
+	estadoUsername: ModelStringInput
+	estadoObservaciones: ModelStringInput
+	estadoTipoActor: ModelEstadoTipoActorInput
+	and: [ModelConsultaEstadoConditionInput]
+	or: [ModelConsultaEstadoConditionInput]
+	not: ModelConsultaEstadoConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelConsultaEstadoConnection {
+	items: [ConsultaEstado]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelConsultaEstadoFilterInput {
+	id: ModelIDInput
+	consultaId: ModelIDInput
+	estado: ModelEstadoConsultaInput
+	estadoFecha: ModelStringInput
+	estadoUsername: ModelStringInput
+	estadoObservaciones: ModelStringInput
+	estadoTipoActor: ModelEstadoTipoActorInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelConsultaEstadoFilterInput]
+	or: [ModelConsultaEstadoFilterInput]
+	not: ModelConsultaEstadoFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelConsultaWebConditionInput {
+	projectID: ModelIDInput
+	imgAnteriorNombreImg: ModelStringInput
+	imgAnteriorSatellite: ModelStringInput
+	imgAnteriorYear: ModelIntInput
+	imgAnteriorMesInicial: ModelIntInput
+	imgAnteriorMesFinal: ModelIntInput
+	imgAnteriorNubosidadMaxima: ModelIntInput
+	imgAnteriorBandas: ModelStringInput
+	imgPosteriorNombreImg: ModelStringInput
+	imgPosteriorSatellite: ModelStringInput
+	imgPosteriorYear: ModelIntInput
+	imgPosteriorMesInicial: ModelIntInput
+	imgPosteriorMesFinal: ModelIntInput
+	imgPosteriorNubosidadMaxima: ModelIntInput
+	imgPosteriorBandas: ModelStringInput
+	fechaHoraConsulta: ModelStringInput
+	usuarioEmailUpdate: ModelStringInput
+	rawConsulta: ModelStringInput
+	resultadoConsulta: ModelStringInput
+	and: [ModelConsultaWebConditionInput]
+	or: [ModelConsultaWebConditionInput]
+	not: ModelConsultaWebConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelConsultaWebConnection {
+	items: [ConsultaWeb]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelConsultaWebFilterInput {
+	id: ModelIDInput
+	projectID: ModelIDInput
+	imgAnteriorNombreImg: ModelStringInput
+	imgAnteriorSatellite: ModelStringInput
+	imgAnteriorYear: ModelIntInput
+	imgAnteriorMesInicial: ModelIntInput
+	imgAnteriorMesFinal: ModelIntInput
+	imgAnteriorNubosidadMaxima: ModelIntInput
+	imgAnteriorBandas: ModelStringInput
+	imgPosteriorNombreImg: ModelStringInput
+	imgPosteriorSatellite: ModelStringInput
+	imgPosteriorYear: ModelIntInput
+	imgPosteriorMesInicial: ModelIntInput
+	imgPosteriorMesFinal: ModelIntInput
+	imgPosteriorNubosidadMaxima: ModelIntInput
+	imgPosteriorBandas: ModelStringInput
+	fechaHoraConsulta: ModelStringInput
+	usuarioEmailUpdate: ModelStringInput
+	rawConsulta: ModelStringInput
+	resultadoConsulta: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelConsultaWebFilterInput]
+	or: [ModelConsultaWebFilterInput]
+	not: ModelConsultaWebFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelDispositivoIotConditionInput {
+	deviceId: ModelStringInput
+	nombre: ModelStringInput
+	departamento: ModelStringInput
+	zona: ModelStringInput
+	tipoDispositivo: ModelTipoDispositivoInput
+	variablesPublicadas: ModelStringInput
+	localizacion: ModelStringInput
+	estado: ModelEstadoDispositivoInput
+	observaciones: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelDispositivoIotConditionInput]
+	or: [ModelDispositivoIotConditionInput]
+	not: ModelDispositivoIotConditionInput
+	_deleted: ModelBooleanInput
+}
+
+type ModelDispositivoIotConnection {
+	items: [DispositivoIot]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelDispositivoIotFilterInput {
+	id: ModelIDInput
+	deviceId: ModelStringInput
+	nombre: ModelStringInput
+	departamento: ModelStringInput
+	zona: ModelStringInput
+	tipoDispositivo: ModelTipoDispositivoInput
+	variablesPublicadas: ModelStringInput
+	localizacion: ModelStringInput
+	estado: ModelEstadoDispositivoInput
+	observaciones: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelDispositivoIotFilterInput]
+	or: [ModelDispositivoIotFilterInput]
+	not: ModelDispositivoIotFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelEstadoConsultaInput {
+	eq: EstadoConsulta
+	ne: EstadoConsulta
+}
+
+input ModelEstadoDispositivoInput {
+	eq: EstadoDispositivo
+	ne: EstadoDispositivo
+}
+
+input ModelEstadoTipoActorInput {
+	eq: EstadoTipoActor
+	ne: EstadoTipoActor
+}
+
+input ModelFeatureConditionInput {
+	feature_type: ModelStringInput
+	name: ModelStringInput
+	description: ModelStringInput
+	feature_group: ModelStringInput
+	default_value: ModelFloatInput
+	is_float: ModelBooleanInput
+	and: [ModelFeatureConditionInput]
+	or: [ModelFeatureConditionInput]
+	not: ModelFeatureConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	unitOfMeasureFeaturesId: ModelIDInput
+}
+
+type ModelFeatureConnection {
+	items: [Feature]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelFeatureFilterInput {
+	id: ModelIDInput
+	feature_type: ModelStringInput
+	name: ModelStringInput
+	description: ModelStringInput
+	feature_group: ModelStringInput
+	default_value: ModelFloatInput
+	is_float: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelFeatureFilterInput]
+	or: [ModelFeatureFilterInput]
+	not: ModelFeatureFilterInput
+	_deleted: ModelBooleanInput
+	unitOfMeasureFeaturesId: ModelIDInput
+}
+
+input ModelFloatInput {
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	between: [Float]
+	attributeExists: Boolean
+	attributeType: ModelAttributeTypes
+}
+
+input ModelFormulaDeepLearningConditionInput {
+	formulaId: ModelIDInput
+	rutaModelo: ModelStringInput
+	rutaEtiquetas: ModelStringInput
+	parametrosJson: ModelStringInput
+	and: [ModelFormulaDeepLearningConditionInput]
+	or: [ModelFormulaDeepLearningConditionInput]
+	not: ModelFormulaDeepLearningConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelFormulaDeepLearningConnection {
+	items: [FormulaDeepLearning]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelFormulaDeepLearningFilterInput {
+	id: ModelIDInput
+	formulaId: ModelIDInput
+	rutaModelo: ModelStringInput
+	rutaEtiquetas: ModelStringInput
+	parametrosJson: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelFormulaDeepLearningFilterInput]
+	or: [ModelFormulaDeepLearningFilterInput]
+	not: ModelFormulaDeepLearningFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelFormulaHistorialConditionInput {
+	formulaId: ModelIDInput
+	version: ModelIntInput
+	fechaModificacion: ModelStringInput
+	datosJson: ModelStringInput
+	usuarioId: ModelStringInput
+	and: [ModelFormulaHistorialConditionInput]
+	or: [ModelFormulaHistorialConditionInput]
+	not: ModelFormulaHistorialConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelFormulaHistorialConnection {
+	items: [FormulaHistorial]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelFormulaHistorialFilterInput {
+	id: ModelIDInput
+	formulaId: ModelIDInput
+	version: ModelIntInput
+	fechaModificacion: ModelStringInput
+	datosJson: ModelStringInput
+	usuarioId: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelFormulaHistorialFilterInput]
+	or: [ModelFormulaHistorialFilterInput]
+	not: ModelFormulaHistorialFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelFormulaTeledeteccionConditionInput {
+	formulaId: ModelIDInput
+	codigoScript: ModelStringInput
+	tipoEntrada: ModelStringInput
+	parametrosJson: ModelStringInput
+	and: [ModelFormulaTeledeteccionConditionInput]
+	or: [ModelFormulaTeledeteccionConditionInput]
+	not: ModelFormulaTeledeteccionConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelFormulaTeledeteccionConnection {
+	items: [FormulaTeledeteccion]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelFormulaTeledeteccionFilterInput {
+	id: ModelIDInput
+	formulaId: ModelIDInput
+	codigoScript: ModelStringInput
+	tipoEntrada: ModelStringInput
+	parametrosJson: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelFormulaTeledeteccionFilterInput]
+	or: [ModelFormulaTeledeteccionFilterInput]
+	not: ModelFormulaTeledeteccionFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelGrupoIotConditionInput {
+	nombre: ModelStringInput
+	descripcion: ModelStringInput
+	estado: ModelEstadoDispositivoInput
+	usuarioCreador: ModelStringInput
+	observaciones: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelGrupoIotConditionInput]
+	or: [ModelGrupoIotConditionInput]
+	not: ModelGrupoIotConditionInput
+	_deleted: ModelBooleanInput
+}
+
+type ModelGrupoIotConnection {
+	items: [GrupoIot]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelGrupoIotFilterInput {
+	id: ModelIDInput
+	nombre: ModelStringInput
+	descripcion: ModelStringInput
+	estado: ModelEstadoDispositivoInput
+	usuarioCreador: ModelStringInput
+	observaciones: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelGrupoIotFilterInput]
+	or: [ModelGrupoIotFilterInput]
+	not: ModelGrupoIotFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelIDInput {
+	ne: ID
+	eq: ID
+	le: ID
+	lt: ID
+	ge: ID
+	gt: ID
+	contains: ID
+	notContains: ID
+	between: [ID]
+	beginsWith: ID
+	attributeExists: Boolean
+	attributeType: ModelAttributeTypes
+	size: ModelSizeInput
+}
+
+input ModelIntInput {
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	between: [Int]
+	attributeExists: Boolean
+	attributeType: ModelAttributeTypes
+}
+
+input ModelIotSessionConditionInput {
+	sessionId: ModelStringInput
+	iotData: ModelStringInput
+	createdAt: ModelStringInput
+	expiresAt: ModelStringInput
+	and: [ModelIotSessionConditionInput]
+	or: [ModelIotSessionConditionInput]
+	not: ModelIotSessionConditionInput
+	_deleted: ModelBooleanInput
+	updatedAt: ModelStringInput
+}
+
+type ModelIotSessionConnection {
+	items: [IotSession]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelIotSessionFilterInput {
+	id: ModelIDInput
+	sessionId: ModelStringInput
+	iotData: ModelStringInput
+	createdAt: ModelStringInput
+	expiresAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelIotSessionFilterInput]
+	or: [ModelIotSessionFilterInput]
+	not: ModelIotSessionFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelMedicionIotConditionInput {
+	dispositivoId: ModelIDInput
+	deviceId: ModelStringInput
+	departamento: ModelStringInput
+	zona: ModelStringInput
+	variable: ModelStringInput
+	valor: ModelFloatInput
+	timestamp: ModelStringInput
+	and: [ModelMedicionIotConditionInput]
+	or: [ModelMedicionIotConditionInput]
+	not: ModelMedicionIotConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelMedicionIotConnection {
+	items: [MedicionIot]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelMedicionIotFilterInput {
+	id: ModelIDInput
+	dispositivoId: ModelIDInput
+	deviceId: ModelStringInput
+	departamento: ModelStringInput
+	zona: ModelStringInput
+	variable: ModelStringInput
+	valor: ModelFloatInput
+	timestamp: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelMedicionIotFilterInput]
+	or: [ModelMedicionIotFilterInput]
+	not: ModelMedicionIotFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelModelAIConditionInput {
+	group: ModelStringInput
+	name: ModelStringInput
+	description: ModelStringInput
+	version: ModelStringInput
+	document_link: ModelStringInput
+	is_latest: ModelBooleanInput
+	api_link: ModelStringInput
+	is_approved: ModelBooleanInput
+	tokens_cost: ModelIntInput
+	cost_tokens: ModelIntInput
+	and: [ModelModelAIConditionInput]
+	or: [ModelModelAIConditionInput]
+	not: ModelModelAIConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	modelAIModelAIsId: ModelIDInput
+}
+
+type ModelModelAIConnection {
+	items: [ModelAI]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelModelAIFilterInput {
+	id: ModelIDInput
+	group: ModelStringInput
+	name: ModelStringInput
+	description: ModelStringInput
+	version: ModelStringInput
+	document_link: ModelStringInput
+	is_latest: ModelBooleanInput
+	api_link: ModelStringInput
+	is_approved: ModelBooleanInput
+	tokens_cost: ModelIntInput
+	cost_tokens: ModelIntInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelModelAIFilterInput]
+	or: [ModelModelAIFilterInput]
+	not: ModelModelAIFilterInput
+	_deleted: ModelBooleanInput
+	modelAIModelAIsId: ModelIDInput
+}
+
+input ModelModelPackageConditionInput {
+	tokenAmount: ModelIntInput
+	and: [ModelModelPackageConditionInput]
+	or: [ModelModelPackageConditionInput]
+	not: ModelModelPackageConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelModelPackageConnection {
+	items: [ModelPackage]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelModelPackageFilterInput {
+	id: ModelIDInput
+	tokenAmount: ModelIntInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelModelPackageFilterInput]
+	or: [ModelModelPackageFilterInput]
+	not: ModelModelPackageFilterInput
+	_deleted: ModelBooleanInput
+}
+
+type ModelPackage {
+	id: ID!
+	tokenAmount: Int!
+	user_model_packages(
+		filter: ModelUserModelPackageFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelUserModelPackageConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+input ModelPermVersionConditionInput {
+	updatedAt: ModelStringInput
+	and: [ModelPermVersionConditionInput]
+	or: [ModelPermVersionConditionInput]
+	not: ModelPermVersionConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+}
+
+type ModelPermVersionConnection {
+	items: [PermVersion]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelPermVersionFilterInput {
+	id: ModelIDInput
+	updatedAt: ModelStringInput
+	createdAt: ModelStringInput
+	and: [ModelPermVersionFilterInput]
+	or: [ModelPermVersionFilterInput]
+	not: ModelPermVersionFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelProjectConditionInput {
+	name: ModelStringInput
+	status: ModelStringInput
+	and: [ModelProjectConditionInput]
+	or: [ModelProjectConditionInput]
+	not: ModelProjectConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelProjectConnection {
+	items: [Project]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelProjectFilterInput {
+	id: ModelIDInput
+	name: ModelStringInput
+	status: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelProjectFilterInput]
+	or: [ModelProjectFilterInput]
+	not: ModelProjectFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelProyectoConditionInput {
+	proyectoNombre: ModelStringInput
+	proyectoDescripcion: ModelStringInput
+	proyectoIdExterno: ModelStringInput
+	proyectoActivo: ModelBooleanInput
+	proyectoFechaCreacion: ModelStringInput
+	proyectoFechaActualizacion: ModelStringInput
+	and: [ModelProyectoConditionInput]
+	or: [ModelProyectoConditionInput]
+	not: ModelProyectoConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelProyectoConnection {
+	items: [Proyecto]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelProyectoFilterInput {
+	id: ModelIDInput
+	proyectoNombre: ModelStringInput
+	proyectoDescripcion: ModelStringInput
+	proyectoIdExterno: ModelStringInput
+	proyectoActivo: ModelBooleanInput
+	proyectoFechaCreacion: ModelStringInput
+	proyectoFechaActualizacion: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelProyectoFilterInput]
+	or: [ModelProyectoFilterInput]
+	not: ModelProyectoFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelProyectoLegacyConditionInput {
+	projectId: ModelStringInput
+	descripcion: ModelStringInput
+	and: [ModelProyectoLegacyConditionInput]
+	or: [ModelProyectoLegacyConditionInput]
+	not: ModelProyectoLegacyConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelProyectoLegacyConnection {
+	items: [ProyectoLegacy]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelProyectoLegacyFilterInput {
+	id: ModelIDInput
+	projectId: ModelStringInput
+	descripcion: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelProyectoLegacyFilterInput]
+	or: [ModelProyectoLegacyFilterInput]
+	not: ModelProyectoLegacyFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelRawDataConditionInput {
+	name: ModelStringInput
+	valueFloat: ModelFloatInput
+	valueString: ModelStringInput
+	start_date: ModelStringInput
+	end_date: ModelStringInput
+	and: [ModelRawDataConditionInput]
+	or: [ModelRawDataConditionInput]
+	not: ModelRawDataConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	treeRawDataId: ModelIDInput
+	featureRawDatasId: ModelIDInput
+}
+
+type ModelRawDataConnection {
+	items: [RawData]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelRawDataFilterInput {
+	id: ModelIDInput
+	name: ModelStringInput
+	valueFloat: ModelFloatInput
+	valueString: ModelStringInput
+	start_date: ModelStringInput
+	end_date: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelRawDataFilterInput]
+	or: [ModelRawDataFilterInput]
+	not: ModelRawDataFilterInput
+	_deleted: ModelBooleanInput
+	treeRawDataId: ModelIDInput
+	featureRawDatasId: ModelIDInput
+}
+
+input ModelRelDispositivoGrupoIotConditionInput {
+	dispositivoId: ModelIDInput
+	grupoId: ModelIDInput
+	fechaAsignacion: ModelStringInput
+	usuarioId: ModelStringInput
+	notas: ModelStringInput
+	and: [ModelRelDispositivoGrupoIotConditionInput]
+	or: [ModelRelDispositivoGrupoIotConditionInput]
+	not: ModelRelDispositivoGrupoIotConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelRelDispositivoGrupoIotConnection {
+	items: [RelDispositivoGrupoIot]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelRelDispositivoGrupoIotFilterInput {
+	id: ModelIDInput
+	dispositivoId: ModelIDInput
+	grupoId: ModelIDInput
+	fechaAsignacion: ModelStringInput
+	usuarioId: ModelStringInput
+	notas: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelRelDispositivoGrupoIotFilterInput]
+	or: [ModelRelDispositivoGrupoIotFilterInput]
+	not: ModelRelDispositivoGrupoIotFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelRelGrupoIotProyectoConditionInput {
+	grupoId: ModelIDInput
+	proyectoId: ModelIDInput
+	fechaAsignacion: ModelStringInput
+	usuarioId: ModelStringInput
+	notas: ModelStringInput
+	and: [ModelRelGrupoIotProyectoConditionInput]
+	or: [ModelRelGrupoIotProyectoConditionInput]
+	not: ModelRelGrupoIotProyectoConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelRelGrupoIotProyectoConnection {
+	items: [RelGrupoIotProyecto]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelRelGrupoIotProyectoFilterInput {
+	id: ModelIDInput
+	grupoId: ModelIDInput
+	proyectoId: ModelIDInput
+	fechaAsignacion: ModelStringInput
+	usuarioId: ModelStringInput
+	notas: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelRelGrupoIotProyectoFilterInput]
+	or: [ModelRelGrupoIotProyectoFilterInput]
+	not: ModelRelGrupoIotProyectoFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelRoutePermissionConditionInput {
+	subjectType: ModelSubjectTypeInput
+	subjectKey: ModelStringInput
+	tagName: ModelStringInput
+	method: ModelStringInput
+	allow: ModelBooleanInput
+	createdAt: ModelStringInput
+	and: [ModelRoutePermissionConditionInput]
+	or: [ModelRoutePermissionConditionInput]
+	not: ModelRoutePermissionConditionInput
+	_deleted: ModelBooleanInput
+	updatedAt: ModelStringInput
+}
+
+type ModelRoutePermissionConnection {
+	items: [RoutePermission]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelRoutePermissionFilterInput {
+	id: ModelIDInput
+	subjectType: ModelSubjectTypeInput
+	subjectKey: ModelStringInput
+	tagName: ModelStringInput
+	method: ModelStringInput
+	allow: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelRoutePermissionFilterInput]
+	or: [ModelRoutePermissionFilterInput]
+	not: ModelRoutePermissionFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelSatelliteTopologyConditionInput {
+	type: ModelStringInput
+	name: ModelStringInput
+	description: ModelStringInput
+	and: [ModelSatelliteTopologyConditionInput]
+	or: [ModelSatelliteTopologyConditionInput]
+	not: ModelSatelliteTopologyConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	satelliteTopologySatelliteTopologiesId: ModelIDInput
+}
+
+type ModelSatelliteTopologyConnection {
+	items: [SatelliteTopology]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelSatelliteTopologyFilterInput {
+	id: ModelIDInput
+	type: ModelStringInput
+	name: ModelStringInput
+	description: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelSatelliteTopologyFilterInput]
+	or: [ModelSatelliteTopologyFilterInput]
+	not: ModelSatelliteTopologyFilterInput
+	_deleted: ModelBooleanInput
+	satelliteTopologySatelliteTopologiesId: ModelIDInput
+}
+
+input ModelSatelliteTopologyModelAIConditionInput {
+	and: [ModelSatelliteTopologyModelAIConditionInput]
+	or: [ModelSatelliteTopologyModelAIConditionInput]
+	not: ModelSatelliteTopologyModelAIConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	satelliteTopologySatelliteTopologyModelAIsId: ModelIDInput
+	modelAISatelliteTopologyModelAIsId: ModelIDInput
+}
+
+type ModelSatelliteTopologyModelAIConnection {
+	items: [SatelliteTopologyModelAI]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelSatelliteTopologyModelAIFilterInput {
+	id: ModelIDInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelSatelliteTopologyModelAIFilterInput]
+	or: [ModelSatelliteTopologyModelAIFilterInput]
+	not: ModelSatelliteTopologyModelAIFilterInput
+	_deleted: ModelBooleanInput
+	satelliteTopologySatelliteTopologyModelAIsId: ModelIDInput
+	modelAISatelliteTopologyModelAIsId: ModelIDInput
+}
+
+input ModelSizeInput {
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	between: [Int]
+}
+
+enum ModelSortDirection {
+	ASC
+	DESC
+}
+
+input ModelSourceTypeInput {
+	eq: SourceType
+	ne: SourceType
+}
+
+input ModelStringInput {
+	ne: String
+	eq: String
+	le: String
+	lt: String
+	ge: String
+	gt: String
+	contains: String
+	notContains: String
+	between: [String]
+	beginsWith: String
+	attributeExists: Boolean
+	attributeType: ModelAttributeTypes
+	size: ModelSizeInput
+}
+
+input ModelSubjectTypeInput {
+	eq: SubjectType
+	ne: SubjectType
+}
+
+input ModelSubscriptionAccessDeadlineFilterInput {
+	id: ModelSubscriptionIDInput
+	subjectType: ModelSubscriptionStringInput
+	subjectKey: ModelSubscriptionStringInput
+	deadline: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionAccessDeadlineFilterInput]
+	or: [ModelSubscriptionAccessDeadlineFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionAnalisisCuotaFilterInput {
+	id: ModelSubscriptionIDInput
+	nombreGrupo: ModelSubscriptionStringInput
+	limiteDiario: ModelSubscriptionIntInput
+	activo: ModelSubscriptionBooleanInput
+	creadoEn: ModelSubscriptionStringInput
+	actualizadoEn: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionAnalisisCuotaFilterInput]
+	or: [ModelSubscriptionAnalisisCuotaFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionAnalisisCuotasUsoDiarioFilterInput {
+	id: ModelSubscriptionIDInput
+	usuarioNombre: ModelSubscriptionStringInput
+	grupoId: ModelSubscriptionIDInput
+	fechaUso: ModelSubscriptionStringInput
+	consultaId: ModelSubscriptionIDInput
+	creadoEn: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionAnalisisCuotasUsoDiarioFilterInput]
+	or: [ModelSubscriptionAnalisisCuotasUsoDiarioFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionApiCredentialFilterInput {
+	id: ModelSubscriptionIDInput
+	name: ModelSubscriptionStringInput
+	apiKeyHash: ModelSubscriptionStringInput
+	active: ModelSubscriptionBooleanInput
+	allowedIps: ModelSubscriptionStringInput
+	expiresAt: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionApiCredentialFilterInput]
+	or: [ModelSubscriptionApiCredentialFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionBooleanInput {
+	ne: Boolean
+	eq: Boolean
+}
+
+input ModelSubscriptionCalculationFilterInput {
+	id: ModelSubscriptionIDInput
+	polygon: ModelSubscriptionStringInput
+	start_date: ModelSubscriptionIntInput
+	end_date: ModelSubscriptionIntInput
+	satellite_TIF: ModelSubscriptionStringInput
+	result_TIF: ModelSubscriptionStringInput
+	result_PNG: ModelSubscriptionStringInput
+	is_to_block_chain: ModelSubscriptionBooleanInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionCalculationFilterInput]
+	or: [ModelSubscriptionCalculationFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionConstructorFormulaCategoriaFilterInput {
+	id: ModelSubscriptionIDInput
+	nombre: ModelSubscriptionStringInput
+	estado: ModelSubscriptionBooleanInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionConstructorFormulaCategoriaFilterInput]
+	or: [ModelSubscriptionConstructorFormulaCategoriaFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionConstructorFormulaFilterInput {
+	id: ModelSubscriptionIDInput
+	nombre: ModelSubscriptionStringInput
+	descripcion: ModelSubscriptionStringInput
+	fuente: ModelSubscriptionStringInput
+	usuarioId: ModelSubscriptionStringInput
+	tipoFormula: ModelSubscriptionStringInput
+	estado: ModelSubscriptionBooleanInput
+	expresionJson: ModelSubscriptionStringInput
+	fechaCreacion: ModelSubscriptionStringInput
+	version: ModelSubscriptionIntInput
+	versionActiva: ModelSubscriptionBooleanInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionConstructorFormulaFilterInput]
+	or: [ModelSubscriptionConstructorFormulaFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionConstructorFormulaVariableFilterInput {
+	id: ModelSubscriptionIDInput
+	nombre: ModelSubscriptionStringInput
+	simbolo: ModelSubscriptionStringInput
+	unidades: ModelSubscriptionStringInput
+	descripcion: ModelSubscriptionStringInput
+	categoriaId: ModelSubscriptionIDInput
+	estado: ModelSubscriptionBooleanInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionConstructorFormulaVariableFilterInput]
+	or: [ModelSubscriptionConstructorFormulaVariableFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionConstructorFormulaVariableRelFilterInput {
+	id: ModelSubscriptionIDInput
+	formulaId: ModelSubscriptionIDInput
+	variableId: ModelSubscriptionIDInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionConstructorFormulaVariableRelFilterInput]
+	or: [ModelSubscriptionConstructorFormulaVariableRelFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionConsultaAnalisisFilterInput {
+	id: ModelSubscriptionIDInput
+	proyectoId: ModelSubscriptionIDInput
+	consultaNombre: ModelSubscriptionStringInput
+	consultaUbicacion: ModelSubscriptionStringInput
+	consultaParametros: ModelSubscriptionStringInput
+	consultaExternaPoligonos: ModelSubscriptionStringInput
+	consultaIdExterna: ModelSubscriptionStringInput
+	respuestaResultado: ModelSubscriptionStringInput
+	respuestaIdentificadorExterno: ModelSubscriptionStringInput
+	modeloId: ModelSubscriptionStringInput
+	modeloName: ModelSubscriptionStringInput
+	modeloDescription: ModelSubscriptionStringInput
+	modeloVersion: ModelSubscriptionStringInput
+	modeloDocumentLink: ModelSubscriptionStringInput
+	modeloApiLink: ModelSubscriptionStringInput
+	blockchainHashTransaccion: ModelSubscriptionStringInput
+	fechaCreacion: ModelSubscriptionStringInput
+	source: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionConsultaAnalisisFilterInput]
+	or: [ModelSubscriptionConsultaAnalisisFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionConsultaApiFilterInput {
+	id: ModelSubscriptionIDInput
+	projectID: ModelSubscriptionStringInput
+	cedulaCatastral: ModelSubscriptionStringInput
+	imgAnteriorNombreImg: ModelSubscriptionStringInput
+	imgAnteriorSatellite: ModelSubscriptionStringInput
+	imgAnteriorYear: ModelSubscriptionIntInput
+	imgAnteriorMesInicial: ModelSubscriptionIntInput
+	imgAnteriorMesFinal: ModelSubscriptionIntInput
+	imgAnteriorNubosidadMaxima: ModelSubscriptionIntInput
+	imgAnteriorBandas: ModelSubscriptionStringInput
+	imgPosteriorNombreImg: ModelSubscriptionStringInput
+	imgPosteriorSatellite: ModelSubscriptionStringInput
+	imgPosteriorYear: ModelSubscriptionIntInput
+	imgPosteriorMesInicial: ModelSubscriptionIntInput
+	imgPosteriorMesFinal: ModelSubscriptionIntInput
+	imgPosteriorNubosidadMaxima: ModelSubscriptionIntInput
+	imgPosteriorBandas: ModelSubscriptionStringInput
+	fechaHoraConsulta: ModelSubscriptionStringInput
+	fechaHoraActualizacion: ModelSubscriptionStringInput
+	usuarioEmailUpdate: ModelSubscriptionStringInput
+	verificado: ModelSubscriptionBooleanInput
+	rawConsulta: ModelSubscriptionStringInput
+	resultadoConsulta: ModelSubscriptionStringInput
+	hashBlockchain: ModelSubscriptionStringInput
+	indexNumberBlockchain: ModelSubscriptionIntInput
+	timestampBlockchain: ModelSubscriptionStringInput
+	onchainBlockchain: ModelSubscriptionBooleanInput
+	txIdBlockchain: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionConsultaApiFilterInput]
+	or: [ModelSubscriptionConsultaApiFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionConsultaEstadoFilterInput {
+	id: ModelSubscriptionIDInput
+	consultaId: ModelSubscriptionIDInput
+	estado: ModelSubscriptionStringInput
+	estadoFecha: ModelSubscriptionStringInput
+	estadoUsername: ModelSubscriptionStringInput
+	estadoObservaciones: ModelSubscriptionStringInput
+	estadoTipoActor: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionConsultaEstadoFilterInput]
+	or: [ModelSubscriptionConsultaEstadoFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionConsultaWebFilterInput {
+	id: ModelSubscriptionIDInput
+	projectID: ModelSubscriptionIDInput
+	imgAnteriorNombreImg: ModelSubscriptionStringInput
+	imgAnteriorSatellite: ModelSubscriptionStringInput
+	imgAnteriorYear: ModelSubscriptionIntInput
+	imgAnteriorMesInicial: ModelSubscriptionIntInput
+	imgAnteriorMesFinal: ModelSubscriptionIntInput
+	imgAnteriorNubosidadMaxima: ModelSubscriptionIntInput
+	imgAnteriorBandas: ModelSubscriptionStringInput
+	imgPosteriorNombreImg: ModelSubscriptionStringInput
+	imgPosteriorSatellite: ModelSubscriptionStringInput
+	imgPosteriorYear: ModelSubscriptionIntInput
+	imgPosteriorMesInicial: ModelSubscriptionIntInput
+	imgPosteriorMesFinal: ModelSubscriptionIntInput
+	imgPosteriorNubosidadMaxima: ModelSubscriptionIntInput
+	imgPosteriorBandas: ModelSubscriptionStringInput
+	fechaHoraConsulta: ModelSubscriptionStringInput
+	usuarioEmailUpdate: ModelSubscriptionStringInput
+	rawConsulta: ModelSubscriptionStringInput
+	resultadoConsulta: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionConsultaWebFilterInput]
+	or: [ModelSubscriptionConsultaWebFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionDispositivoIotFilterInput {
+	id: ModelSubscriptionIDInput
+	deviceId: ModelSubscriptionStringInput
+	nombre: ModelSubscriptionStringInput
+	departamento: ModelSubscriptionStringInput
+	zona: ModelSubscriptionStringInput
+	tipoDispositivo: ModelSubscriptionStringInput
+	variablesPublicadas: ModelSubscriptionStringInput
+	localizacion: ModelSubscriptionStringInput
+	estado: ModelSubscriptionStringInput
+	observaciones: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionDispositivoIotFilterInput]
+	or: [ModelSubscriptionDispositivoIotFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionFeatureFilterInput {
+	id: ModelSubscriptionIDInput
+	feature_type: ModelSubscriptionStringInput
+	name: ModelSubscriptionStringInput
+	description: ModelSubscriptionStringInput
+	feature_group: ModelSubscriptionStringInput
+	default_value: ModelSubscriptionFloatInput
+	is_float: ModelSubscriptionBooleanInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionFeatureFilterInput]
+	or: [ModelSubscriptionFeatureFilterInput]
+	_deleted: ModelBooleanInput
+	featureTemplateFeaturesId: ModelSubscriptionIDInput
+	featureRawDatasId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionFloatInput {
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	between: [Float]
+	in: [Float]
+	notIn: [Float]
+}
+
+input ModelSubscriptionFormulaDeepLearningFilterInput {
+	id: ModelSubscriptionIDInput
+	formulaId: ModelSubscriptionIDInput
+	rutaModelo: ModelSubscriptionStringInput
+	rutaEtiquetas: ModelSubscriptionStringInput
+	parametrosJson: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionFormulaDeepLearningFilterInput]
+	or: [ModelSubscriptionFormulaDeepLearningFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionFormulaHistorialFilterInput {
+	id: ModelSubscriptionIDInput
+	formulaId: ModelSubscriptionIDInput
+	version: ModelSubscriptionIntInput
+	fechaModificacion: ModelSubscriptionStringInput
+	datosJson: ModelSubscriptionStringInput
+	usuarioId: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionFormulaHistorialFilterInput]
+	or: [ModelSubscriptionFormulaHistorialFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionFormulaTeledeteccionFilterInput {
+	id: ModelSubscriptionIDInput
+	formulaId: ModelSubscriptionIDInput
+	codigoScript: ModelSubscriptionStringInput
+	tipoEntrada: ModelSubscriptionStringInput
+	parametrosJson: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionFormulaTeledeteccionFilterInput]
+	or: [ModelSubscriptionFormulaTeledeteccionFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionGrupoIotFilterInput {
+	id: ModelSubscriptionIDInput
+	nombre: ModelSubscriptionStringInput
+	descripcion: ModelSubscriptionStringInput
+	estado: ModelSubscriptionStringInput
+	usuarioCreador: ModelSubscriptionStringInput
+	observaciones: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionGrupoIotFilterInput]
+	or: [ModelSubscriptionGrupoIotFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionIDInput {
+	ne: ID
+	eq: ID
+	le: ID
+	lt: ID
+	ge: ID
+	gt: ID
+	contains: ID
+	notContains: ID
+	between: [ID]
+	beginsWith: ID
+	in: [ID]
+	notIn: [ID]
+}
+
+input ModelSubscriptionIntInput {
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	between: [Int]
+	in: [Int]
+	notIn: [Int]
+}
+
+input ModelSubscriptionIotSessionFilterInput {
+	id: ModelSubscriptionIDInput
+	sessionId: ModelSubscriptionStringInput
+	iotData: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	expiresAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionIotSessionFilterInput]
+	or: [ModelSubscriptionIotSessionFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionMedicionIotFilterInput {
+	id: ModelSubscriptionIDInput
+	dispositivoId: ModelSubscriptionIDInput
+	deviceId: ModelSubscriptionStringInput
+	departamento: ModelSubscriptionStringInput
+	zona: ModelSubscriptionStringInput
+	variable: ModelSubscriptionStringInput
+	valor: ModelSubscriptionFloatInput
+	timestamp: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionMedicionIotFilterInput]
+	or: [ModelSubscriptionMedicionIotFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionModelAIFilterInput {
+	id: ModelSubscriptionIDInput
+	group: ModelSubscriptionStringInput
+	name: ModelSubscriptionStringInput
+	description: ModelSubscriptionStringInput
+	version: ModelSubscriptionStringInput
+	document_link: ModelSubscriptionStringInput
+	is_latest: ModelSubscriptionBooleanInput
+	api_link: ModelSubscriptionStringInput
+	is_approved: ModelSubscriptionBooleanInput
+	tokens_cost: ModelSubscriptionIntInput
+	cost_tokens: ModelSubscriptionIntInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionModelAIFilterInput]
+	or: [ModelSubscriptionModelAIFilterInput]
+	_deleted: ModelBooleanInput
+	modelAIModelAIsId: ModelSubscriptionIDInput
+	modelAICalculationsId: ModelSubscriptionIDInput
+	modelAISatelliteTopologyModelAIsId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionModelPackageFilterInput {
+	id: ModelSubscriptionIDInput
+	tokenAmount: ModelSubscriptionIntInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionModelPackageFilterInput]
+	or: [ModelSubscriptionModelPackageFilterInput]
+	_deleted: ModelBooleanInput
+	modelPackageUser_model_packagesId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionPermVersionFilterInput {
+	id: ModelSubscriptionIDInput
+	updatedAt: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionPermVersionFilterInput]
+	or: [ModelSubscriptionPermVersionFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionProjectFilterInput {
+	id: ModelSubscriptionIDInput
+	name: ModelSubscriptionStringInput
+	status: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionProjectFilterInput]
+	or: [ModelSubscriptionProjectFilterInput]
+	_deleted: ModelBooleanInput
+	projectTreesId: ModelSubscriptionIDInput
+	projectTopologiesId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionProyectoFilterInput {
+	id: ModelSubscriptionIDInput
+	proyectoNombre: ModelSubscriptionStringInput
+	proyectoDescripcion: ModelSubscriptionStringInput
+	proyectoIdExterno: ModelSubscriptionStringInput
+	proyectoActivo: ModelSubscriptionBooleanInput
+	proyectoFechaCreacion: ModelSubscriptionStringInput
+	proyectoFechaActualizacion: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionProyectoFilterInput]
+	or: [ModelSubscriptionProyectoFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionProyectoLegacyFilterInput {
+	id: ModelSubscriptionIDInput
+	projectId: ModelSubscriptionStringInput
+	descripcion: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionProyectoLegacyFilterInput]
+	or: [ModelSubscriptionProyectoLegacyFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionRawDataFilterInput {
+	id: ModelSubscriptionIDInput
+	name: ModelSubscriptionStringInput
+	valueFloat: ModelSubscriptionFloatInput
+	valueString: ModelSubscriptionStringInput
+	start_date: ModelSubscriptionStringInput
+	end_date: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionRawDataFilterInput]
+	or: [ModelSubscriptionRawDataFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionRelDispositivoGrupoIotFilterInput {
+	id: ModelSubscriptionIDInput
+	dispositivoId: ModelSubscriptionIDInput
+	grupoId: ModelSubscriptionIDInput
+	fechaAsignacion: ModelSubscriptionStringInput
+	usuarioId: ModelSubscriptionStringInput
+	notas: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionRelDispositivoGrupoIotFilterInput]
+	or: [ModelSubscriptionRelDispositivoGrupoIotFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionRelGrupoIotProyectoFilterInput {
+	id: ModelSubscriptionIDInput
+	grupoId: ModelSubscriptionIDInput
+	proyectoId: ModelSubscriptionIDInput
+	fechaAsignacion: ModelSubscriptionStringInput
+	usuarioId: ModelSubscriptionStringInput
+	notas: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionRelGrupoIotProyectoFilterInput]
+	or: [ModelSubscriptionRelGrupoIotProyectoFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionRoutePermissionFilterInput {
+	id: ModelSubscriptionIDInput
+	subjectType: ModelSubscriptionStringInput
+	subjectKey: ModelSubscriptionStringInput
+	tagName: ModelSubscriptionStringInput
+	method: ModelSubscriptionStringInput
+	allow: ModelSubscriptionBooleanInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionRoutePermissionFilterInput]
+	or: [ModelSubscriptionRoutePermissionFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionSatelliteTopologyFilterInput {
+	id: ModelSubscriptionIDInput
+	type: ModelSubscriptionStringInput
+	name: ModelSubscriptionStringInput
+	description: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionSatelliteTopologyFilterInput]
+	or: [ModelSubscriptionSatelliteTopologyFilterInput]
+	_deleted: ModelBooleanInput
+	satelliteTopologySatelliteTopologiesId: ModelSubscriptionIDInput
+	satelliteTopologySatelliteTopologyModelAIsId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionSatelliteTopologyModelAIFilterInput {
+	id: ModelSubscriptionIDInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionSatelliteTopologyModelAIFilterInput]
+	or: [ModelSubscriptionSatelliteTopologyModelAIFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionStringInput {
+	ne: String
+	eq: String
+	le: String
+	lt: String
+	ge: String
+	gt: String
+	contains: String
+	notContains: String
+	between: [String]
+	beginsWith: String
+	in: [String]
+	notIn: [String]
+}
+
+input ModelSubscriptionTemplateFeatureFilterInput {
+	id: ModelSubscriptionIDInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionTemplateFeatureFilterInput]
+	or: [ModelSubscriptionTemplateFeatureFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionTemplateFilterInput {
+	id: ModelSubscriptionIDInput
+	name: ModelSubscriptionStringInput
+	description: ModelSubscriptionStringInput
+	type: ModelSubscriptionIntInput
+	version: ModelSubscriptionStringInput
+	is_latest: ModelSubscriptionBooleanInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionTemplateFilterInput]
+	or: [ModelSubscriptionTemplateFilterInput]
+	_deleted: ModelBooleanInput
+	templateTemplatesId: ModelSubscriptionIDInput
+	templateTemplateFeaturesId: ModelSubscriptionIDInput
+	templateTreesId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionTopologyFilterInput {
+	id: ModelSubscriptionIDInput
+	name: ModelSubscriptionStringInput
+	string_code: ModelSubscriptionStringInput
+	number_code: ModelSubscriptionStringInput
+	status: ModelSubscriptionStringInput
+	polygon: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionTopologyFilterInput]
+	or: [ModelSubscriptionTopologyFilterInput]
+	_deleted: ModelBooleanInput
+	topologyTopologiesId: ModelSubscriptionIDInput
+	topologyTopologyTreesId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionTopologyTreeFilterInput {
+	id: ModelSubscriptionIDInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionTopologyTreeFilterInput]
+	or: [ModelSubscriptionTopologyTreeFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelSubscriptionTreeFilterInput {
+	id: ModelSubscriptionIDInput
+	name: ModelSubscriptionStringInput
+	are_audios_processed: ModelSubscriptionBooleanInput
+	status: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionTreeFilterInput]
+	or: [ModelSubscriptionTreeFilterInput]
+	_deleted: ModelBooleanInput
+	treeRawDataId: ModelSubscriptionIDInput
+	treeTopologyTreesId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionUnitOfMeasureFilterInput {
+	id: ModelSubscriptionIDInput
+	name: ModelSubscriptionStringInput
+	abbreviation: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionUnitOfMeasureFilterInput]
+	or: [ModelSubscriptionUnitOfMeasureFilterInput]
+	_deleted: ModelBooleanInput
+	unitOfMeasureFeaturesId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionUserFilterInput {
+	id: ModelSubscriptionIDInput
+	departamento: ModelSubscriptionStringInput
+	municipio: ModelSubscriptionStringInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionUserFilterInput]
+	or: [ModelSubscriptionUserFilterInput]
+	_deleted: ModelBooleanInput
+	userUser_model_packagesId: ModelSubscriptionIDInput
+	userCalculationsId: ModelSubscriptionIDInput
+}
+
+input ModelSubscriptionUserModelPackageFilterInput {
+	id: ModelSubscriptionIDInput
+	createdAt: ModelSubscriptionStringInput
+	updatedAt: ModelSubscriptionStringInput
+	and: [ModelSubscriptionUserModelPackageFilterInput]
+	or: [ModelSubscriptionUserModelPackageFilterInput]
+	_deleted: ModelBooleanInput
+}
+
+input ModelTemplateConditionInput {
+	name: ModelStringInput
+	description: ModelStringInput
+	type: ModelIntInput
+	version: ModelStringInput
+	is_latest: ModelBooleanInput
+	and: [ModelTemplateConditionInput]
+	or: [ModelTemplateConditionInput]
+	not: ModelTemplateConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	templateTemplatesId: ModelIDInput
+}
+
+type ModelTemplateConnection {
+	items: [Template]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelTemplateFeatureConditionInput {
+	and: [ModelTemplateFeatureConditionInput]
+	or: [ModelTemplateFeatureConditionInput]
+	not: ModelTemplateFeatureConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	templateTemplateFeaturesId: ModelIDInput
+	featureTemplateFeaturesId: ModelIDInput
+}
+
+type ModelTemplateFeatureConnection {
+	items: [TemplateFeature]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelTemplateFeatureFilterInput {
+	id: ModelIDInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelTemplateFeatureFilterInput]
+	or: [ModelTemplateFeatureFilterInput]
+	not: ModelTemplateFeatureFilterInput
+	_deleted: ModelBooleanInput
+	templateTemplateFeaturesId: ModelIDInput
+	featureTemplateFeaturesId: ModelIDInput
+}
+
+input ModelTemplateFilterInput {
+	id: ModelIDInput
+	name: ModelStringInput
+	description: ModelStringInput
+	type: ModelIntInput
+	version: ModelStringInput
+	is_latest: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelTemplateFilterInput]
+	or: [ModelTemplateFilterInput]
+	not: ModelTemplateFilterInput
+	_deleted: ModelBooleanInput
+	templateTemplatesId: ModelIDInput
+}
+
+input ModelTipoDispositivoInput {
+	eq: TipoDispositivo
+	ne: TipoDispositivo
+}
+
+input ModelTipoFormulaInput {
+	eq: TipoFormula
+	ne: TipoFormula
+}
+
+input ModelTopologyConditionInput {
+	name: ModelStringInput
+	string_code: ModelStringInput
+	number_code: ModelStringInput
+	status: ModelStringInput
+	polygon: ModelStringInput
+	and: [ModelTopologyConditionInput]
+	or: [ModelTopologyConditionInput]
+	not: ModelTopologyConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	projectTopologiesId: ModelIDInput
+	topologyTopologiesId: ModelIDInput
+}
+
+type ModelTopologyConnection {
+	items: [Topology]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelTopologyFilterInput {
+	id: ModelIDInput
+	name: ModelStringInput
+	string_code: ModelStringInput
+	number_code: ModelStringInput
+	status: ModelStringInput
+	polygon: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelTopologyFilterInput]
+	or: [ModelTopologyFilterInput]
+	not: ModelTopologyFilterInput
+	_deleted: ModelBooleanInput
+	projectTopologiesId: ModelIDInput
+	topologyTopologiesId: ModelIDInput
+}
+
+input ModelTopologyTreeConditionInput {
+	and: [ModelTopologyTreeConditionInput]
+	or: [ModelTopologyTreeConditionInput]
+	not: ModelTopologyTreeConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	treeTopologyTreesId: ModelIDInput
+	topologyTopologyTreesId: ModelIDInput
+}
+
+type ModelTopologyTreeConnection {
+	items: [TopologyTree]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelTopologyTreeFilterInput {
+	id: ModelIDInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelTopologyTreeFilterInput]
+	or: [ModelTopologyTreeFilterInput]
+	not: ModelTopologyTreeFilterInput
+	_deleted: ModelBooleanInput
+	treeTopologyTreesId: ModelIDInput
+	topologyTopologyTreesId: ModelIDInput
+}
+
+input ModelTreeConditionInput {
+	name: ModelStringInput
+	are_audios_processed: ModelBooleanInput
+	status: ModelStringInput
+	and: [ModelTreeConditionInput]
+	or: [ModelTreeConditionInput]
+	not: ModelTreeConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	projectTreesId: ModelIDInput
+	templateTreesId: ModelIDInput
+}
+
+type ModelTreeConnection {
+	items: [Tree]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelTreeFilterInput {
+	id: ModelIDInput
+	name: ModelStringInput
+	are_audios_processed: ModelBooleanInput
+	status: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelTreeFilterInput]
+	or: [ModelTreeFilterInput]
+	not: ModelTreeFilterInput
+	_deleted: ModelBooleanInput
+	projectTreesId: ModelIDInput
+	templateTreesId: ModelIDInput
+}
+
+input ModelUnitOfMeasureConditionInput {
+	name: ModelStringInput
+	abbreviation: ModelStringInput
+	and: [ModelUnitOfMeasureConditionInput]
+	or: [ModelUnitOfMeasureConditionInput]
+	not: ModelUnitOfMeasureConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelUnitOfMeasureConnection {
+	items: [UnitOfMeasure]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelUnitOfMeasureFilterInput {
+	id: ModelIDInput
+	name: ModelStringInput
+	abbreviation: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelUnitOfMeasureFilterInput]
+	or: [ModelUnitOfMeasureFilterInput]
+	not: ModelUnitOfMeasureFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelUserConditionInput {
+	departamento: ModelStringInput
+	municipio: ModelStringInput
+	and: [ModelUserConditionInput]
+	or: [ModelUserConditionInput]
+	not: ModelUserConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+}
+
+type ModelUserConnection {
+	items: [User]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelUserFilterInput {
+	id: ModelIDInput
+	departamento: ModelStringInput
+	municipio: ModelStringInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelUserFilterInput]
+	or: [ModelUserFilterInput]
+	not: ModelUserFilterInput
+	_deleted: ModelBooleanInput
+}
+
+input ModelUserModelPackageConditionInput {
+	and: [ModelUserModelPackageConditionInput]
+	or: [ModelUserModelPackageConditionInput]
+	not: ModelUserModelPackageConditionInput
+	_deleted: ModelBooleanInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	userUser_model_packagesId: ModelIDInput
+	modelPackageUser_model_packagesId: ModelIDInput
+}
+
+type ModelUserModelPackageConnection {
+	items: [UserModelPackage]!
+	nextToken: String
+	startedAt: AWSTimestamp
+}
+
+input ModelUserModelPackageFilterInput {
+	id: ModelIDInput
+	createdAt: ModelStringInput
+	updatedAt: ModelStringInput
+	and: [ModelUserModelPackageFilterInput]
+	or: [ModelUserModelPackageFilterInput]
+	not: ModelUserModelPackageFilterInput
+	_deleted: ModelBooleanInput
+	userUser_model_packagesId: ModelIDInput
+	modelPackageUser_model_packagesId: ModelIDInput
+}
+
+type PermVersion {
+	id: ID!
+	updatedAt: AWSDateTime
+	createdAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type Project {
+	id: ID!
+	name: String!
+	status: String!
+	trees(
+		filter: ModelTreeFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTreeConnection
+	topologies(
+		filter: ModelTopologyFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTopologyConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type Proyecto {
+	id: ID!
+	proyectoNombre: String!
+	proyectoDescripcion: String
+	proyectoIdExterno: String
+	proyectoActivo: Boolean!
+	proyectoFechaCreacion: AWSDateTime
+	proyectoFechaActualizacion: AWSDateTime
+	consultasAnalisis(
+		filter: ModelConsultaAnalisisFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaAnalisisConnection
+	gruposIot(
+		filter: ModelRelGrupoIotProyectoFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelRelGrupoIotProyectoConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type ProyectoLegacy {
+	id: ID!
+	projectId: String!
+	descripcion: String
+	consultasWeb(
+		filter: ModelConsultaWebFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaWebConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type RawData {
+	id: ID!
+	name: String
+	valueFloat: Float
+	valueString: String
+	start_date: AWSDateTime
+	end_date: AWSDateTime
+	feature: Feature
+	tree: Tree
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	treeRawDataId: ID
+	featureRawDatasId: ID
+}
+
+type RelDispositivoGrupoIot {
+	id: ID!
+	dispositivoId: ID!
+	grupoId: ID!
+	fechaAsignacion: AWSDateTime
+	usuarioId: String
+	notas: String
+	dispositivo: DispositivoIot
+	grupo: GrupoIot
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type RelGrupoIotProyecto {
+	id: ID!
+	grupoId: ID!
+	proyectoId: ID!
+	fechaAsignacion: AWSDateTime
+	usuarioId: String
+	notas: String
+	grupo: GrupoIot
+	proyecto: Proyecto
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type RoutePermission {
+	id: ID!
+	subjectType: SubjectType!
+	subjectKey: String!
+	tagName: String!
+	method: String!
+	allow: Boolean!
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type SatelliteTopology {
+	id: ID!
+	type: String!
+	name: String!
+	description: String!
+	satelliteTopologyParent: SatelliteTopology
+	satelliteTopologies(
+		filter: ModelSatelliteTopologyFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelSatelliteTopologyConnection
+	satelliteTopologyModelAIs(
+		filter: ModelSatelliteTopologyModelAIFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelSatelliteTopologyModelAIConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	satelliteTopologySatelliteTopologiesId: ID
+}
+
+type SatelliteTopologyModelAI {
+	id: ID!
+	satelliteTopology: SatelliteTopology
+	modelAI: ModelAI
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	satelliteTopologySatelliteTopologyModelAIsId: ID
+	modelAISatelliteTopologyModelAIsId: ID
+}
+
+enum SourceType {
+	INTERNAL
+	EXTERNAL
+}
+
+enum SubjectType {
+	USER
+	GROUP
+	API_CLIENT
+}
+
+type Template {
+	id: ID!
+	name: String!
+	description: String
+	type: Int!
+	version: String
+	is_latest: Boolean!
+	templateParent: Template
+	templates(
+		filter: ModelTemplateFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTemplateConnection
+	templateFeatures(
+		filter: ModelTemplateFeatureFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTemplateFeatureConnection
+	trees(
+		filter: ModelTreeFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTreeConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	templateTemplatesId: ID
+}
+
+type TemplateFeature {
+	id: ID!
+	template: Template
+	feature: Feature
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	templateTemplateFeaturesId: ID
+	featureTemplateFeaturesId: ID
+}
+
+enum TipoDispositivo {
+	SENSOR
+	ACTUADOR
+	GATEWAY
+	CAMERA
+	OTHER
+}
+
+enum TipoFormula {
+	ALOMETRICA
+	TELEDETECCION
+	DEEP_LEARNING
+	ESTADISTICA
+}
+
+type Topology {
+	id: ID!
+	name: String!
+	string_code: String
+	number_code: String
+	status: String
+	polygon: AWSJSON
+	project: Project
+	topologyParent: Topology
+	topologies(
+		filter: ModelTopologyFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTopologyConnection
+	topologyTrees(
+		filter: ModelTopologyTreeFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTopologyTreeConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	projectTopologiesId: ID
+	topologyTopologiesId: ID
+}
+
+type TopologyTree {
+	id: ID!
+	topology: Topology
+	tree: Tree
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	treeTopologyTreesId: ID
+	topologyTopologyTreesId: ID
+}
+
+type Tree {
+	id: ID!
+	name: String!
+	are_audios_processed: Boolean
+	status: String
+	project: Project
+	template: Template
+	rawData(
+		filter: ModelRawDataFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelRawDataConnection
+	topologyTrees(
+		filter: ModelTopologyTreeFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelTopologyTreeConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	projectTreesId: ID
+	templateTreesId: ID
+}
+
+type UnitOfMeasure {
+	id: ID!
+	name: String!
+	abbreviation: String
+	features(
+		filter: ModelFeatureFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelFeatureConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+input UpdateAccessDeadlineInput {
+	id: ID!
+	subjectType: SubjectType
+	subjectKey: String
+	deadline: AWSDateTime
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	_version: Int
+}
+
+input UpdateAnalisisCuotaInput {
+	id: ID!
+	nombreGrupo: String
+	limiteDiario: Int
+	activo: Boolean
+	creadoEn: AWSDateTime
+	actualizadoEn: AWSDateTime
+	_version: Int
+}
+
+input UpdateAnalisisCuotasUsoDiarioInput {
+	id: ID!
+	usuarioNombre: String
+	grupoId: ID
+	fechaUso: AWSDateTime
+	consultaId: ID
+	creadoEn: AWSDateTime
+	_version: Int
+}
+
+input UpdateApiCredentialInput {
+	id: ID!
+	name: String
+	apiKeyHash: String
+	active: Boolean
+	allowedIps: String
+	expiresAt: AWSDateTime
+	createdAt: AWSDateTime
+	_version: Int
+}
+
+input UpdateCalculationInput {
+	id: ID!
+	polygon: AWSJSON
+	start_date: AWSTimestamp
+	end_date: AWSTimestamp
+	satellite_TIF: AWSURL
+	result_TIF: AWSURL
+	result_PNG: AWSURL
+	is_to_block_chain: Boolean
+	_version: Int
+	modelAICalculationsId: ID
+	userCalculationsId: ID
+}
+
+input UpdateConstructorFormulaCategoriaInput {
+	id: ID!
+	nombre: String
+	estado: Boolean
+	_version: Int
+}
+
+input UpdateConstructorFormulaInput {
+	id: ID!
+	nombre: String
+	descripcion: String
+	fuente: String
+	usuarioId: String
+	tipoFormula: TipoFormula
+	estado: Boolean
+	expresionJson: AWSJSON
+	fechaCreacion: AWSDateTime
+	version: Int
+	versionActiva: Boolean
+	_version: Int
+}
+
+input UpdateConstructorFormulaVariableInput {
+	id: ID!
+	nombre: String
+	simbolo: String
+	unidades: String
+	descripcion: String
+	categoriaId: ID
+	estado: Boolean
+	_version: Int
+}
+
+input UpdateConstructorFormulaVariableRelInput {
+	id: ID!
+	formulaId: ID
+	variableId: ID
+	_version: Int
+}
+
+input UpdateConsultaAnalisisInput {
+	id: ID!
+	proyectoId: ID
+	consultaNombre: String
+	consultaUbicacion: String
+	consultaParametros: AWSJSON
+	consultaExternaPoligonos: AWSJSON
+	consultaIdExterna: String
+	respuestaResultado: AWSJSON
+	respuestaIdentificadorExterno: String
+	modeloId: String
+	modeloName: String
+	modeloDescription: String
+	modeloVersion: String
+	modeloDocumentLink: String
+	modeloApiLink: String
+	blockchainHashTransaccion: String
+	fechaCreacion: AWSDateTime
+	source: SourceType
+	_version: Int
+}
+
+input UpdateConsultaApiInput {
+	id: ID!
+	projectID: String
+	cedulaCatastral: String
+	imgAnteriorNombreImg: String
+	imgAnteriorSatellite: String
+	imgAnteriorYear: Int
+	imgAnteriorMesInicial: Int
+	imgAnteriorMesFinal: Int
+	imgAnteriorNubosidadMaxima: Int
+	imgAnteriorBandas: String
+	imgPosteriorNombreImg: String
+	imgPosteriorSatellite: String
+	imgPosteriorYear: Int
+	imgPosteriorMesInicial: Int
+	imgPosteriorMesFinal: Int
+	imgPosteriorNubosidadMaxima: Int
+	imgPosteriorBandas: String
+	fechaHoraConsulta: AWSDateTime
+	fechaHoraActualizacion: AWSDateTime
+	usuarioEmailUpdate: String
+	verificado: Boolean
+	rawConsulta: AWSJSON
+	resultadoConsulta: AWSJSON
+	hashBlockchain: String
+	indexNumberBlockchain: Int
+	timestampBlockchain: AWSDateTime
+	onchainBlockchain: Boolean
+	txIdBlockchain: String
+	_version: Int
+}
+
+input UpdateConsultaEstadoInput {
+	id: ID!
+	consultaId: ID
+	estado: EstadoConsulta
+	estadoFecha: AWSDateTime
+	estadoUsername: String
+	estadoObservaciones: String
+	estadoTipoActor: EstadoTipoActor
+	_version: Int
+}
+
+input UpdateConsultaWebInput {
+	id: ID!
+	projectID: ID
+	imgAnteriorNombreImg: String
+	imgAnteriorSatellite: String
+	imgAnteriorYear: Int
+	imgAnteriorMesInicial: Int
+	imgAnteriorMesFinal: Int
+	imgAnteriorNubosidadMaxima: Int
+	imgAnteriorBandas: String
+	imgPosteriorNombreImg: String
+	imgPosteriorSatellite: String
+	imgPosteriorYear: Int
+	imgPosteriorMesInicial: Int
+	imgPosteriorMesFinal: Int
+	imgPosteriorNubosidadMaxima: Int
+	imgPosteriorBandas: String
+	fechaHoraConsulta: AWSDateTime
+	usuarioEmailUpdate: String
+	rawConsulta: AWSJSON
+	resultadoConsulta: AWSJSON
+	_version: Int
+}
+
+input UpdateDispositivoIotInput {
+	id: ID!
+	deviceId: String
+	nombre: String
+	departamento: String
+	zona: String
+	tipoDispositivo: TipoDispositivo
+	variablesPublicadas: AWSJSON
+	localizacion: AWSJSON
+	estado: EstadoDispositivo
+	observaciones: String
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	_version: Int
+}
+
+input UpdateFeatureInput {
+	id: ID!
+	feature_type: String
+	name: String
+	description: String
+	feature_group: String
+	default_value: Float
+	is_float: Boolean
+	_version: Int
+	unitOfMeasureFeaturesId: ID
+}
+
+input UpdateFormulaDeepLearningInput {
+	id: ID!
+	formulaId: ID
+	rutaModelo: String
+	rutaEtiquetas: String
+	parametrosJson: AWSJSON
+	_version: Int
+}
+
+input UpdateFormulaHistorialInput {
+	id: ID!
+	formulaId: ID
+	version: Int
+	fechaModificacion: AWSDateTime
+	datosJson: AWSJSON
+	usuarioId: String
+	_version: Int
+}
+
+input UpdateFormulaTeledeteccionInput {
+	id: ID!
+	formulaId: ID
+	codigoScript: String
+	tipoEntrada: String
+	parametrosJson: AWSJSON
+	_version: Int
+}
+
+input UpdateGrupoIotInput {
+	id: ID!
+	nombre: String
+	descripcion: String
+	estado: EstadoDispositivo
+	usuarioCreador: String
+	observaciones: String
+	createdAt: AWSDateTime
+	updatedAt: AWSDateTime
+	_version: Int
+}
+
+input UpdateIotSessionInput {
+	id: ID!
+	sessionId: String
+	iotData: String
+	createdAt: AWSDateTime
+	expiresAt: AWSDateTime
+	_version: Int
+}
+
+input UpdateMedicionIotInput {
+	id: ID!
+	dispositivoId: ID
+	deviceId: String
+	departamento: String
+	zona: String
+	variable: String
+	valor: Float
+	timestamp: AWSDateTime
+	_version: Int
+}
+
+input UpdateModelAIInput {
+	id: ID!
+	group: String
+	name: String
+	description: String
+	version: String
+	document_link: String
+	is_latest: Boolean
+	api_link: String
+	is_approved: Boolean
+	tokens_cost: Int
+	cost_tokens: Int
+	_version: Int
+	modelAIModelAIsId: ID
+}
+
+input UpdateModelPackageInput {
+	id: ID!
+	tokenAmount: Int
+	_version: Int
+}
+
+input UpdatePermVersionInput {
+	id: ID!
+	updatedAt: AWSDateTime
+	_version: Int
+}
+
+input UpdateProjectInput {
+	id: ID!
+	name: String
+	status: String
+	_version: Int
+}
+
+input UpdateProyectoInput {
+	id: ID!
+	proyectoNombre: String
+	proyectoDescripcion: String
+	proyectoIdExterno: String
+	proyectoActivo: Boolean
+	proyectoFechaCreacion: AWSDateTime
+	proyectoFechaActualizacion: AWSDateTime
+	_version: Int
+}
+
+input UpdateProyectoLegacyInput {
+	id: ID!
+	projectId: String
+	descripcion: String
+	_version: Int
+}
+
+input UpdateRawDataInput {
+	id: ID!
+	name: String
+	valueFloat: Float
+	valueString: String
+	start_date: AWSDateTime
+	end_date: AWSDateTime
+	_version: Int
+	treeRawDataId: ID
+	featureRawDatasId: ID
+}
+
+input UpdateRelDispositivoGrupoIotInput {
+	id: ID!
+	dispositivoId: ID
+	grupoId: ID
+	fechaAsignacion: AWSDateTime
+	usuarioId: String
+	notas: String
+	_version: Int
+}
+
+input UpdateRelGrupoIotProyectoInput {
+	id: ID!
+	grupoId: ID
+	proyectoId: ID
+	fechaAsignacion: AWSDateTime
+	usuarioId: String
+	notas: String
+	_version: Int
+}
+
+input UpdateRoutePermissionInput {
+	id: ID!
+	subjectType: SubjectType
+	subjectKey: String
+	tagName: String
+	method: String
+	allow: Boolean
+	createdAt: AWSDateTime
+	_version: Int
+}
+
+input UpdateSatelliteTopologyInput {
+	id: ID!
+	type: String
+	name: String
+	description: String
+	_version: Int
+	satelliteTopologySatelliteTopologiesId: ID
+}
+
+input UpdateSatelliteTopologyModelAIInput {
+	id: ID!
+	_version: Int
+	satelliteTopologySatelliteTopologyModelAIsId: ID
+	modelAISatelliteTopologyModelAIsId: ID
+}
+
+input UpdateTemplateFeatureInput {
+	id: ID!
+	_version: Int
+	templateTemplateFeaturesId: ID
+	featureTemplateFeaturesId: ID
+}
+
+input UpdateTemplateInput {
+	id: ID!
+	name: String
+	description: String
+	type: Int
+	version: String
+	is_latest: Boolean
+	_version: Int
+	templateTemplatesId: ID
+}
+
+input UpdateTopologyInput {
+	id: ID!
+	name: String
+	string_code: String
+	number_code: String
+	status: String
+	polygon: AWSJSON
+	_version: Int
+	projectTopologiesId: ID
+	topologyTopologiesId: ID
+}
+
+input UpdateTopologyTreeInput {
+	id: ID!
+	_version: Int
+	treeTopologyTreesId: ID
+	topologyTopologyTreesId: ID
+}
+
+input UpdateTreeInput {
+	id: ID!
+	name: String
+	are_audios_processed: Boolean
+	status: String
+	_version: Int
+	projectTreesId: ID
+	templateTreesId: ID
+}
+
+input UpdateUnitOfMeasureInput {
+	id: ID!
+	name: String
+	abbreviation: String
+	_version: Int
+}
+
+input UpdateUserInput {
+	id: ID!
+	departamento: String
+	municipio: String
+	_version: Int
+}
+
+input UpdateUserModelPackageInput {
+	id: ID!
+	_version: Int
+	userUser_model_packagesId: ID
+	modelPackageUser_model_packagesId: ID
+}
+
+type User {
+	id: ID!
+	departamento: String
+	municipio: String
+	user_model_packages(
+		filter: ModelUserModelPackageFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelUserModelPackageConnection
+	calculations(
+		filter: ModelCalculationFilterInput,
+		sortDirection: ModelSortDirection,
+		limit: Int,
+		nextToken: String
+	): ModelCalculationConnection
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+}
+
+type UserModelPackage {
+	id: ID!
+	modelPackage: ModelPackage
+	user: User
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	_version: Int!
+	_deleted: Boolean
+	_lastChangedAt: AWSTimestamp!
+	userUser_model_packagesId: ID
+	modelPackageUser_model_packagesId: ID
+}
+
+type Mutation {
+	createSatelliteTopology(input: CreateSatelliteTopologyInput!, condition: ModelSatelliteTopologyConditionInput): SatelliteTopology
+	updateSatelliteTopology(input: UpdateSatelliteTopologyInput!, condition: ModelSatelliteTopologyConditionInput): SatelliteTopology
+	deleteSatelliteTopology(input: DeleteSatelliteTopologyInput!, condition: ModelSatelliteTopologyConditionInput): SatelliteTopology
+	createModelAI(input: CreateModelAIInput!, condition: ModelModelAIConditionInput): ModelAI
+	updateModelAI(input: UpdateModelAIInput!, condition: ModelModelAIConditionInput): ModelAI
+	deleteModelAI(input: DeleteModelAIInput!, condition: ModelModelAIConditionInput): ModelAI
+	createSatelliteTopologyModelAI(input: CreateSatelliteTopologyModelAIInput!, condition: ModelSatelliteTopologyModelAIConditionInput): SatelliteTopologyModelAI
+	updateSatelliteTopologyModelAI(input: UpdateSatelliteTopologyModelAIInput!, condition: ModelSatelliteTopologyModelAIConditionInput): SatelliteTopologyModelAI
+	deleteSatelliteTopologyModelAI(input: DeleteSatelliteTopologyModelAIInput!, condition: ModelSatelliteTopologyModelAIConditionInput): SatelliteTopologyModelAI
+	createCalculation(input: CreateCalculationInput!, condition: ModelCalculationConditionInput): Calculation
+	updateCalculation(input: UpdateCalculationInput!, condition: ModelCalculationConditionInput): Calculation
+	deleteCalculation(input: DeleteCalculationInput!, condition: ModelCalculationConditionInput): Calculation
+	createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+	updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+	deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+	createModelPackage(input: CreateModelPackageInput!, condition: ModelModelPackageConditionInput): ModelPackage
+	updateModelPackage(input: UpdateModelPackageInput!, condition: ModelModelPackageConditionInput): ModelPackage
+	deleteModelPackage(input: DeleteModelPackageInput!, condition: ModelModelPackageConditionInput): ModelPackage
+	createUserModelPackage(input: CreateUserModelPackageInput!, condition: ModelUserModelPackageConditionInput): UserModelPackage
+	updateUserModelPackage(input: UpdateUserModelPackageInput!, condition: ModelUserModelPackageConditionInput): UserModelPackage
+	deleteUserModelPackage(input: DeleteUserModelPackageInput!, condition: ModelUserModelPackageConditionInput): UserModelPackage
+	createProyecto(input: CreateProyectoInput!, condition: ModelProyectoConditionInput): Proyecto
+	updateProyecto(input: UpdateProyectoInput!, condition: ModelProyectoConditionInput): Proyecto
+	deleteProyecto(input: DeleteProyectoInput!, condition: ModelProyectoConditionInput): Proyecto
+	createConsultaAnalisis(input: CreateConsultaAnalisisInput!, condition: ModelConsultaAnalisisConditionInput): ConsultaAnalisis
+	updateConsultaAnalisis(input: UpdateConsultaAnalisisInput!, condition: ModelConsultaAnalisisConditionInput): ConsultaAnalisis
+	deleteConsultaAnalisis(input: DeleteConsultaAnalisisInput!, condition: ModelConsultaAnalisisConditionInput): ConsultaAnalisis
+	createConsultaEstado(input: CreateConsultaEstadoInput!, condition: ModelConsultaEstadoConditionInput): ConsultaEstado
+	updateConsultaEstado(input: UpdateConsultaEstadoInput!, condition: ModelConsultaEstadoConditionInput): ConsultaEstado
+	deleteConsultaEstado(input: DeleteConsultaEstadoInput!, condition: ModelConsultaEstadoConditionInput): ConsultaEstado
+	createAnalisisCuota(input: CreateAnalisisCuotaInput!, condition: ModelAnalisisCuotaConditionInput): AnalisisCuota
+	updateAnalisisCuota(input: UpdateAnalisisCuotaInput!, condition: ModelAnalisisCuotaConditionInput): AnalisisCuota
+	deleteAnalisisCuota(input: DeleteAnalisisCuotaInput!, condition: ModelAnalisisCuotaConditionInput): AnalisisCuota
+	createAnalisisCuotasUsoDiario(input: CreateAnalisisCuotasUsoDiarioInput!, condition: ModelAnalisisCuotasUsoDiarioConditionInput): AnalisisCuotasUsoDiario
+	updateAnalisisCuotasUsoDiario(input: UpdateAnalisisCuotasUsoDiarioInput!, condition: ModelAnalisisCuotasUsoDiarioConditionInput): AnalisisCuotasUsoDiario
+	deleteAnalisisCuotasUsoDiario(input: DeleteAnalisisCuotasUsoDiarioInput!, condition: ModelAnalisisCuotasUsoDiarioConditionInput): AnalisisCuotasUsoDiario
+	createDispositivoIot(input: CreateDispositivoIotInput!, condition: ModelDispositivoIotConditionInput): DispositivoIot
+	updateDispositivoIot(input: UpdateDispositivoIotInput!, condition: ModelDispositivoIotConditionInput): DispositivoIot
+	deleteDispositivoIot(input: DeleteDispositivoIotInput!, condition: ModelDispositivoIotConditionInput): DispositivoIot
+	createGrupoIot(input: CreateGrupoIotInput!, condition: ModelGrupoIotConditionInput): GrupoIot
+	updateGrupoIot(input: UpdateGrupoIotInput!, condition: ModelGrupoIotConditionInput): GrupoIot
+	deleteGrupoIot(input: DeleteGrupoIotInput!, condition: ModelGrupoIotConditionInput): GrupoIot
+	createRelDispositivoGrupoIot(input: CreateRelDispositivoGrupoIotInput!, condition: ModelRelDispositivoGrupoIotConditionInput): RelDispositivoGrupoIot
+	updateRelDispositivoGrupoIot(input: UpdateRelDispositivoGrupoIotInput!, condition: ModelRelDispositivoGrupoIotConditionInput): RelDispositivoGrupoIot
+	deleteRelDispositivoGrupoIot(input: DeleteRelDispositivoGrupoIotInput!, condition: ModelRelDispositivoGrupoIotConditionInput): RelDispositivoGrupoIot
+	createRelGrupoIotProyecto(input: CreateRelGrupoIotProyectoInput!, condition: ModelRelGrupoIotProyectoConditionInput): RelGrupoIotProyecto
+	updateRelGrupoIotProyecto(input: UpdateRelGrupoIotProyectoInput!, condition: ModelRelGrupoIotProyectoConditionInput): RelGrupoIotProyecto
+	deleteRelGrupoIotProyecto(input: DeleteRelGrupoIotProyectoInput!, condition: ModelRelGrupoIotProyectoConditionInput): RelGrupoIotProyecto
+	createMedicionIot(input: CreateMedicionIotInput!, condition: ModelMedicionIotConditionInput): MedicionIot
+	updateMedicionIot(input: UpdateMedicionIotInput!, condition: ModelMedicionIotConditionInput): MedicionIot
+	deleteMedicionIot(input: DeleteMedicionIotInput!, condition: ModelMedicionIotConditionInput): MedicionIot
+	createProyectoLegacy(input: CreateProyectoLegacyInput!, condition: ModelProyectoLegacyConditionInput): ProyectoLegacy
+	updateProyectoLegacy(input: UpdateProyectoLegacyInput!, condition: ModelProyectoLegacyConditionInput): ProyectoLegacy
+	deleteProyectoLegacy(input: DeleteProyectoLegacyInput!, condition: ModelProyectoLegacyConditionInput): ProyectoLegacy
+	createConsultaWeb(input: CreateConsultaWebInput!, condition: ModelConsultaWebConditionInput): ConsultaWeb
+	updateConsultaWeb(input: UpdateConsultaWebInput!, condition: ModelConsultaWebConditionInput): ConsultaWeb
+	deleteConsultaWeb(input: DeleteConsultaWebInput!, condition: ModelConsultaWebConditionInput): ConsultaWeb
+	createConsultaApi(input: CreateConsultaApiInput!, condition: ModelConsultaApiConditionInput): ConsultaApi
+	updateConsultaApi(input: UpdateConsultaApiInput!, condition: ModelConsultaApiConditionInput): ConsultaApi
+	deleteConsultaApi(input: DeleteConsultaApiInput!, condition: ModelConsultaApiConditionInput): ConsultaApi
+	createIotSession(input: CreateIotSessionInput!, condition: ModelIotSessionConditionInput): IotSession
+	updateIotSession(input: UpdateIotSessionInput!, condition: ModelIotSessionConditionInput): IotSession
+	deleteIotSession(input: DeleteIotSessionInput!, condition: ModelIotSessionConditionInput): IotSession
+	createConstructorFormulaCategoria(input: CreateConstructorFormulaCategoriaInput!, condition: ModelConstructorFormulaCategoriaConditionInput): ConstructorFormulaCategoria
+	updateConstructorFormulaCategoria(input: UpdateConstructorFormulaCategoriaInput!, condition: ModelConstructorFormulaCategoriaConditionInput): ConstructorFormulaCategoria
+	deleteConstructorFormulaCategoria(input: DeleteConstructorFormulaCategoriaInput!, condition: ModelConstructorFormulaCategoriaConditionInput): ConstructorFormulaCategoria
+	createConstructorFormulaVariable(input: CreateConstructorFormulaVariableInput!, condition: ModelConstructorFormulaVariableConditionInput): ConstructorFormulaVariable
+	updateConstructorFormulaVariable(input: UpdateConstructorFormulaVariableInput!, condition: ModelConstructorFormulaVariableConditionInput): ConstructorFormulaVariable
+	deleteConstructorFormulaVariable(input: DeleteConstructorFormulaVariableInput!, condition: ModelConstructorFormulaVariableConditionInput): ConstructorFormulaVariable
+	createConstructorFormula(input: CreateConstructorFormulaInput!, condition: ModelConstructorFormulaConditionInput): ConstructorFormula
+	updateConstructorFormula(input: UpdateConstructorFormulaInput!, condition: ModelConstructorFormulaConditionInput): ConstructorFormula
+	deleteConstructorFormula(input: DeleteConstructorFormulaInput!, condition: ModelConstructorFormulaConditionInput): ConstructorFormula
+	createConstructorFormulaVariableRel(input: CreateConstructorFormulaVariableRelInput!, condition: ModelConstructorFormulaVariableRelConditionInput): ConstructorFormulaVariableRel
+	updateConstructorFormulaVariableRel(input: UpdateConstructorFormulaVariableRelInput!, condition: ModelConstructorFormulaVariableRelConditionInput): ConstructorFormulaVariableRel
+	deleteConstructorFormulaVariableRel(input: DeleteConstructorFormulaVariableRelInput!, condition: ModelConstructorFormulaVariableRelConditionInput): ConstructorFormulaVariableRel
+	createFormulaTeledeteccion(input: CreateFormulaTeledeteccionInput!, condition: ModelFormulaTeledeteccionConditionInput): FormulaTeledeteccion
+	updateFormulaTeledeteccion(input: UpdateFormulaTeledeteccionInput!, condition: ModelFormulaTeledeteccionConditionInput): FormulaTeledeteccion
+	deleteFormulaTeledeteccion(input: DeleteFormulaTeledeteccionInput!, condition: ModelFormulaTeledeteccionConditionInput): FormulaTeledeteccion
+	createFormulaDeepLearning(input: CreateFormulaDeepLearningInput!, condition: ModelFormulaDeepLearningConditionInput): FormulaDeepLearning
+	updateFormulaDeepLearning(input: UpdateFormulaDeepLearningInput!, condition: ModelFormulaDeepLearningConditionInput): FormulaDeepLearning
+	deleteFormulaDeepLearning(input: DeleteFormulaDeepLearningInput!, condition: ModelFormulaDeepLearningConditionInput): FormulaDeepLearning
+	createFormulaHistorial(input: CreateFormulaHistorialInput!, condition: ModelFormulaHistorialConditionInput): FormulaHistorial
+	updateFormulaHistorial(input: UpdateFormulaHistorialInput!, condition: ModelFormulaHistorialConditionInput): FormulaHistorial
+	deleteFormulaHistorial(input: DeleteFormulaHistorialInput!, condition: ModelFormulaHistorialConditionInput): FormulaHistorial
+	createAccessDeadline(input: CreateAccessDeadlineInput!, condition: ModelAccessDeadlineConditionInput): AccessDeadline
+	updateAccessDeadline(input: UpdateAccessDeadlineInput!, condition: ModelAccessDeadlineConditionInput): AccessDeadline
+	deleteAccessDeadline(input: DeleteAccessDeadlineInput!, condition: ModelAccessDeadlineConditionInput): AccessDeadline
+	createRoutePermission(input: CreateRoutePermissionInput!, condition: ModelRoutePermissionConditionInput): RoutePermission
+	updateRoutePermission(input: UpdateRoutePermissionInput!, condition: ModelRoutePermissionConditionInput): RoutePermission
+	deleteRoutePermission(input: DeleteRoutePermissionInput!, condition: ModelRoutePermissionConditionInput): RoutePermission
+	createApiCredential(input: CreateApiCredentialInput!, condition: ModelApiCredentialConditionInput): ApiCredential
+	updateApiCredential(input: UpdateApiCredentialInput!, condition: ModelApiCredentialConditionInput): ApiCredential
+	deleteApiCredential(input: DeleteApiCredentialInput!, condition: ModelApiCredentialConditionInput): ApiCredential
+	createPermVersion(input: CreatePermVersionInput!, condition: ModelPermVersionConditionInput): PermVersion
+	updatePermVersion(input: UpdatePermVersionInput!, condition: ModelPermVersionConditionInput): PermVersion
+	deletePermVersion(input: DeletePermVersionInput!, condition: ModelPermVersionConditionInput): PermVersion
+	createUnitOfMeasure(input: CreateUnitOfMeasureInput!, condition: ModelUnitOfMeasureConditionInput): UnitOfMeasure
+	updateUnitOfMeasure(input: UpdateUnitOfMeasureInput!, condition: ModelUnitOfMeasureConditionInput): UnitOfMeasure
+	deleteUnitOfMeasure(input: DeleteUnitOfMeasureInput!, condition: ModelUnitOfMeasureConditionInput): UnitOfMeasure
+	createProject(input: CreateProjectInput!, condition: ModelProjectConditionInput): Project
+	updateProject(input: UpdateProjectInput!, condition: ModelProjectConditionInput): Project
+	deleteProject(input: DeleteProjectInput!, condition: ModelProjectConditionInput): Project
+	createTemplate(input: CreateTemplateInput!, condition: ModelTemplateConditionInput): Template
+	updateTemplate(input: UpdateTemplateInput!, condition: ModelTemplateConditionInput): Template
+	deleteTemplate(input: DeleteTemplateInput!, condition: ModelTemplateConditionInput): Template
+	createTree(input: CreateTreeInput!, condition: ModelTreeConditionInput): Tree
+	updateTree(input: UpdateTreeInput!, condition: ModelTreeConditionInput): Tree
+	deleteTree(input: DeleteTreeInput!, condition: ModelTreeConditionInput): Tree
+	createTemplateFeature(input: CreateTemplateFeatureInput!, condition: ModelTemplateFeatureConditionInput): TemplateFeature
+	updateTemplateFeature(input: UpdateTemplateFeatureInput!, condition: ModelTemplateFeatureConditionInput): TemplateFeature
+	deleteTemplateFeature(input: DeleteTemplateFeatureInput!, condition: ModelTemplateFeatureConditionInput): TemplateFeature
+	createFeature(input: CreateFeatureInput!, condition: ModelFeatureConditionInput): Feature
+	updateFeature(input: UpdateFeatureInput!, condition: ModelFeatureConditionInput): Feature
+	deleteFeature(input: DeleteFeatureInput!, condition: ModelFeatureConditionInput): Feature
+	createRawData(input: CreateRawDataInput!, condition: ModelRawDataConditionInput): RawData
+	updateRawData(input: UpdateRawDataInput!, condition: ModelRawDataConditionInput): RawData
+	deleteRawData(input: DeleteRawDataInput!, condition: ModelRawDataConditionInput): RawData
+	createTopology(input: CreateTopologyInput!, condition: ModelTopologyConditionInput): Topology
+	updateTopology(input: UpdateTopologyInput!, condition: ModelTopologyConditionInput): Topology
+	deleteTopology(input: DeleteTopologyInput!, condition: ModelTopologyConditionInput): Topology
+	createTopologyTree(input: CreateTopologyTreeInput!, condition: ModelTopologyTreeConditionInput): TopologyTree
+	updateTopologyTree(input: UpdateTopologyTreeInput!, condition: ModelTopologyTreeConditionInput): TopologyTree
+	deleteTopologyTree(input: DeleteTopologyTreeInput!, condition: ModelTopologyTreeConditionInput): TopologyTree
+}
+
+type Query {
+	getSatelliteTopology(id: ID!): SatelliteTopology
+	listSatelliteTopologies(filter: ModelSatelliteTopologyFilterInput, limit: Int, nextToken: String): ModelSatelliteTopologyConnection
+	syncSatelliteTopologies(
+		filter: ModelSatelliteTopologyFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelSatelliteTopologyConnection
+	getModelAI(id: ID!): ModelAI
+	listModelAIS(filter: ModelModelAIFilterInput, limit: Int, nextToken: String): ModelModelAIConnection
+	syncModelAIS(
+		filter: ModelModelAIFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelModelAIConnection
+	getSatelliteTopologyModelAI(id: ID!): SatelliteTopologyModelAI
+	listSatelliteTopologyModelAIS(filter: ModelSatelliteTopologyModelAIFilterInput, limit: Int, nextToken: String): ModelSatelliteTopologyModelAIConnection
+	syncSatelliteTopologyModelAIS(
+		filter: ModelSatelliteTopologyModelAIFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelSatelliteTopologyModelAIConnection
+	getCalculation(id: ID!): Calculation
+	listCalculations(filter: ModelCalculationFilterInput, limit: Int, nextToken: String): ModelCalculationConnection
+	syncCalculations(
+		filter: ModelCalculationFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelCalculationConnection
+	getUser(id: ID!): User
+	listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+	syncUsers(
+		filter: ModelUserFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelUserConnection
+	getModelPackage(id: ID!): ModelPackage
+	listModelPackages(filter: ModelModelPackageFilterInput, limit: Int, nextToken: String): ModelModelPackageConnection
+	syncModelPackages(
+		filter: ModelModelPackageFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelModelPackageConnection
+	getUserModelPackage(id: ID!): UserModelPackage
+	listUserModelPackages(filter: ModelUserModelPackageFilterInput, limit: Int, nextToken: String): ModelUserModelPackageConnection
+	syncUserModelPackages(
+		filter: ModelUserModelPackageFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelUserModelPackageConnection
+	getProyecto(id: ID!): Proyecto
+	listProyectos(filter: ModelProyectoFilterInput, limit: Int, nextToken: String): ModelProyectoConnection
+	syncProyectos(
+		filter: ModelProyectoFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelProyectoConnection
+	getConsultaAnalisis(id: ID!): ConsultaAnalisis
+	listConsultaAnalises(filter: ModelConsultaAnalisisFilterInput, limit: Int, nextToken: String): ModelConsultaAnalisisConnection
+	syncConsultaAnalises(
+		filter: ModelConsultaAnalisisFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelConsultaAnalisisConnection
+	getConsultaEstado(id: ID!): ConsultaEstado
+	listConsultaEstados(filter: ModelConsultaEstadoFilterInput, limit: Int, nextToken: String): ModelConsultaEstadoConnection
+	syncConsultaEstados(
+		filter: ModelConsultaEstadoFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelConsultaEstadoConnection
+	getAnalisisCuota(id: ID!): AnalisisCuota
+	listAnalisisCuotas(filter: ModelAnalisisCuotaFilterInput, limit: Int, nextToken: String): ModelAnalisisCuotaConnection
+	syncAnalisisCuotas(
+		filter: ModelAnalisisCuotaFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelAnalisisCuotaConnection
+	getAnalisisCuotasUsoDiario(id: ID!): AnalisisCuotasUsoDiario
+	listAnalisisCuotasUsoDiarios(filter: ModelAnalisisCuotasUsoDiarioFilterInput, limit: Int, nextToken: String): ModelAnalisisCuotasUsoDiarioConnection
+	syncAnalisisCuotasUsoDiarios(
+		filter: ModelAnalisisCuotasUsoDiarioFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelAnalisisCuotasUsoDiarioConnection
+	getDispositivoIot(id: ID!): DispositivoIot
+	listDispositivoIots(filter: ModelDispositivoIotFilterInput, limit: Int, nextToken: String): ModelDispositivoIotConnection
+	syncDispositivoIots(
+		filter: ModelDispositivoIotFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelDispositivoIotConnection
+	getGrupoIot(id: ID!): GrupoIot
+	listGrupoIots(filter: ModelGrupoIotFilterInput, limit: Int, nextToken: String): ModelGrupoIotConnection
+	syncGrupoIots(
+		filter: ModelGrupoIotFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelGrupoIotConnection
+	getRelDispositivoGrupoIot(id: ID!): RelDispositivoGrupoIot
+	listRelDispositivoGrupoIots(filter: ModelRelDispositivoGrupoIotFilterInput, limit: Int, nextToken: String): ModelRelDispositivoGrupoIotConnection
+	syncRelDispositivoGrupoIots(
+		filter: ModelRelDispositivoGrupoIotFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelRelDispositivoGrupoIotConnection
+	getRelGrupoIotProyecto(id: ID!): RelGrupoIotProyecto
+	listRelGrupoIotProyectos(filter: ModelRelGrupoIotProyectoFilterInput, limit: Int, nextToken: String): ModelRelGrupoIotProyectoConnection
+	syncRelGrupoIotProyectos(
+		filter: ModelRelGrupoIotProyectoFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelRelGrupoIotProyectoConnection
+	getMedicionIot(id: ID!): MedicionIot
+	listMedicionIots(filter: ModelMedicionIotFilterInput, limit: Int, nextToken: String): ModelMedicionIotConnection
+	syncMedicionIots(
+		filter: ModelMedicionIotFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelMedicionIotConnection
+	getProyectoLegacy(id: ID!): ProyectoLegacy
+	listProyectoLegacies(filter: ModelProyectoLegacyFilterInput, limit: Int, nextToken: String): ModelProyectoLegacyConnection
+	syncProyectoLegacies(
+		filter: ModelProyectoLegacyFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelProyectoLegacyConnection
+	getConsultaWeb(id: ID!): ConsultaWeb
+	listConsultaWebs(filter: ModelConsultaWebFilterInput, limit: Int, nextToken: String): ModelConsultaWebConnection
+	syncConsultaWebs(
+		filter: ModelConsultaWebFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelConsultaWebConnection
+	getConsultaApi(id: ID!): ConsultaApi
+	listConsultaApis(filter: ModelConsultaApiFilterInput, limit: Int, nextToken: String): ModelConsultaApiConnection
+	syncConsultaApis(
+		filter: ModelConsultaApiFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelConsultaApiConnection
+	getIotSession(id: ID!): IotSession
+	listIotSessions(filter: ModelIotSessionFilterInput, limit: Int, nextToken: String): ModelIotSessionConnection
+	syncIotSessions(
+		filter: ModelIotSessionFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelIotSessionConnection
+	getConstructorFormulaCategoria(id: ID!): ConstructorFormulaCategoria
+	listConstructorFormulaCategorias(filter: ModelConstructorFormulaCategoriaFilterInput, limit: Int, nextToken: String): ModelConstructorFormulaCategoriaConnection
+	syncConstructorFormulaCategorias(
+		filter: ModelConstructorFormulaCategoriaFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelConstructorFormulaCategoriaConnection
+	getConstructorFormulaVariable(id: ID!): ConstructorFormulaVariable
+	listConstructorFormulaVariables(filter: ModelConstructorFormulaVariableFilterInput, limit: Int, nextToken: String): ModelConstructorFormulaVariableConnection
+	syncConstructorFormulaVariables(
+		filter: ModelConstructorFormulaVariableFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelConstructorFormulaVariableConnection
+	getConstructorFormula(id: ID!): ConstructorFormula
+	listConstructorFormulas(filter: ModelConstructorFormulaFilterInput, limit: Int, nextToken: String): ModelConstructorFormulaConnection
+	syncConstructorFormulas(
+		filter: ModelConstructorFormulaFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelConstructorFormulaConnection
+	getConstructorFormulaVariableRel(id: ID!): ConstructorFormulaVariableRel
+	listConstructorFormulaVariableRels(filter: ModelConstructorFormulaVariableRelFilterInput, limit: Int, nextToken: String): ModelConstructorFormulaVariableRelConnection
+	syncConstructorFormulaVariableRels(
+		filter: ModelConstructorFormulaVariableRelFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelConstructorFormulaVariableRelConnection
+	getFormulaTeledeteccion(id: ID!): FormulaTeledeteccion
+	listFormulaTeledeteccions(filter: ModelFormulaTeledeteccionFilterInput, limit: Int, nextToken: String): ModelFormulaTeledeteccionConnection
+	syncFormulaTeledeteccions(
+		filter: ModelFormulaTeledeteccionFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelFormulaTeledeteccionConnection
+	getFormulaDeepLearning(id: ID!): FormulaDeepLearning
+	listFormulaDeepLearnings(filter: ModelFormulaDeepLearningFilterInput, limit: Int, nextToken: String): ModelFormulaDeepLearningConnection
+	syncFormulaDeepLearnings(
+		filter: ModelFormulaDeepLearningFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelFormulaDeepLearningConnection
+	getFormulaHistorial(id: ID!): FormulaHistorial
+	listFormulaHistorials(filter: ModelFormulaHistorialFilterInput, limit: Int, nextToken: String): ModelFormulaHistorialConnection
+	syncFormulaHistorials(
+		filter: ModelFormulaHistorialFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelFormulaHistorialConnection
+	getAccessDeadline(id: ID!): AccessDeadline
+	listAccessDeadlines(filter: ModelAccessDeadlineFilterInput, limit: Int, nextToken: String): ModelAccessDeadlineConnection
+	syncAccessDeadlines(
+		filter: ModelAccessDeadlineFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelAccessDeadlineConnection
+	getRoutePermission(id: ID!): RoutePermission
+	listRoutePermissions(filter: ModelRoutePermissionFilterInput, limit: Int, nextToken: String): ModelRoutePermissionConnection
+	syncRoutePermissions(
+		filter: ModelRoutePermissionFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelRoutePermissionConnection
+	getApiCredential(id: ID!): ApiCredential
+	listApiCredentials(filter: ModelApiCredentialFilterInput, limit: Int, nextToken: String): ModelApiCredentialConnection
+	syncApiCredentials(
+		filter: ModelApiCredentialFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelApiCredentialConnection
+	getPermVersion(id: ID!): PermVersion
+	listPermVersions(filter: ModelPermVersionFilterInput, limit: Int, nextToken: String): ModelPermVersionConnection
+	syncPermVersions(
+		filter: ModelPermVersionFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelPermVersionConnection
+	getUnitOfMeasure(id: ID!): UnitOfMeasure
+	listUnitOfMeasures(filter: ModelUnitOfMeasureFilterInput, limit: Int, nextToken: String): ModelUnitOfMeasureConnection
+	syncUnitOfMeasures(
+		filter: ModelUnitOfMeasureFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelUnitOfMeasureConnection
+	getProject(id: ID!): Project
+	listProjects(filter: ModelProjectFilterInput, limit: Int, nextToken: String): ModelProjectConnection
+	syncProjects(
+		filter: ModelProjectFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelProjectConnection
+	getTemplate(id: ID!): Template
+	listTemplates(filter: ModelTemplateFilterInput, limit: Int, nextToken: String): ModelTemplateConnection
+	syncTemplates(
+		filter: ModelTemplateFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelTemplateConnection
+	getTree(id: ID!): Tree
+	listTrees(filter: ModelTreeFilterInput, limit: Int, nextToken: String): ModelTreeConnection
+	syncTrees(
+		filter: ModelTreeFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelTreeConnection
+	getTemplateFeature(id: ID!): TemplateFeature
+	listTemplateFeatures(filter: ModelTemplateFeatureFilterInput, limit: Int, nextToken: String): ModelTemplateFeatureConnection
+	syncTemplateFeatures(
+		filter: ModelTemplateFeatureFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelTemplateFeatureConnection
+	getFeature(id: ID!): Feature
+	listFeatures(filter: ModelFeatureFilterInput, limit: Int, nextToken: String): ModelFeatureConnection
+	syncFeatures(
+		filter: ModelFeatureFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelFeatureConnection
+	getRawData(id: ID!): RawData
+	listRawData(filter: ModelRawDataFilterInput, limit: Int, nextToken: String): ModelRawDataConnection
+	syncRawData(
+		filter: ModelRawDataFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelRawDataConnection
+	getTopology(id: ID!): Topology
+	listTopologies(filter: ModelTopologyFilterInput, limit: Int, nextToken: String): ModelTopologyConnection
+	syncTopologies(
+		filter: ModelTopologyFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelTopologyConnection
+	getTopologyTree(id: ID!): TopologyTree
+	listTopologyTrees(filter: ModelTopologyTreeFilterInput, limit: Int, nextToken: String): ModelTopologyTreeConnection
+	syncTopologyTrees(
+		filter: ModelTopologyTreeFilterInput,
+		limit: Int,
+		nextToken: String,
+		lastSync: AWSTimestamp
+	): ModelTopologyTreeConnection
+	consultaAnalisesByProyectoId(
+		proyectoId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConsultaAnalisisFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaAnalisisConnection
+	consultaEstadosByConsultaId(
+		consultaId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConsultaEstadoFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaEstadoConnection
+	analisisCuotasByNombreGrupo(
+		nombreGrupo: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelAnalisisCuotaFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelAnalisisCuotaConnection
+	analisisCuotasUsoDiariosByUsuarioNombre(
+		usuarioNombre: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelAnalisisCuotasUsoDiarioFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelAnalisisCuotasUsoDiarioConnection
+	analisisCuotasUsoDiariosByGrupoId(
+		grupoId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelAnalisisCuotasUsoDiarioFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelAnalisisCuotasUsoDiarioConnection
+	analisisCuotasUsoDiariosByFechaUso(
+		fechaUso: AWSDateTime!,
+		sortDirection: ModelSortDirection,
+		filter: ModelAnalisisCuotasUsoDiarioFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelAnalisisCuotasUsoDiarioConnection
+	analisisCuotasUsoDiariosByConsultaId(
+		consultaId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelAnalisisCuotasUsoDiarioFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelAnalisisCuotasUsoDiarioConnection
+	dispositivoIotsByDeviceId(
+		deviceId: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelDispositivoIotFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelDispositivoIotConnection
+	grupoIotsByNombre(
+		nombre: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelGrupoIotFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelGrupoIotConnection
+	relDispositivoGrupoIotsByDispositivoId(
+		dispositivoId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelRelDispositivoGrupoIotFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelRelDispositivoGrupoIotConnection
+	relDispositivoGrupoIotsByGrupoId(
+		grupoId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelRelDispositivoGrupoIotFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelRelDispositivoGrupoIotConnection
+	relGrupoIotProyectosByGrupoId(
+		grupoId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelRelGrupoIotProyectoFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelRelGrupoIotProyectoConnection
+	relGrupoIotProyectosByProyectoId(
+		proyectoId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelRelGrupoIotProyectoFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelRelGrupoIotProyectoConnection
+	medicionIotsByDispositivoId(
+		dispositivoId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelMedicionIotFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelMedicionIotConnection
+	medicionIotsByDeviceId(
+		deviceId: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelMedicionIotFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelMedicionIotConnection
+	medicionIotsByTimestamp(
+		timestamp: AWSDateTime!,
+		sortDirection: ModelSortDirection,
+		filter: ModelMedicionIotFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelMedicionIotConnection
+	proyectoLegaciesByProjectId(
+		projectId: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelProyectoLegacyFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelProyectoLegacyConnection
+	consultaWebsByProjectID(
+		projectID: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConsultaWebFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaWebConnection
+	consultaWebsByFechaHoraConsulta(
+		fechaHoraConsulta: AWSDateTime!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConsultaWebFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaWebConnection
+	consultaApisByFechaHoraConsulta(
+		fechaHoraConsulta: AWSDateTime!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConsultaApiFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaApiConnection
+	consultaApisByHashBlockchain(
+		hashBlockchain: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConsultaApiFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConsultaApiConnection
+	iotSessionsBySessionId(
+		sessionId: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelIotSessionFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelIotSessionConnection
+	iotSessionsByExpiresAt(
+		expiresAt: AWSDateTime!,
+		sortDirection: ModelSortDirection,
+		filter: ModelIotSessionFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelIotSessionConnection
+	constructorFormulaCategoriasByNombre(
+		nombre: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConstructorFormulaCategoriaFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaCategoriaConnection
+	constructorFormulaVariablesByNombre(
+		nombre: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConstructorFormulaVariableFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaVariableConnection
+	constructorFormulaVariablesBySimbolo(
+		simbolo: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConstructorFormulaVariableFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaVariableConnection
+	constructorFormulaVariablesByCategoriaId(
+		categoriaId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConstructorFormulaVariableFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaVariableConnection
+	constructorFormulasByNombre(
+		nombre: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConstructorFormulaFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaConnection
+	constructorFormulasByUsuarioId(
+		usuarioId: String!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConstructorFormulaFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaConnection
+	constructorFormulaVariableRelsByFormulaId(
+		formulaId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConstructorFormulaVariableRelFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaVariableRelConnection
+	constructorFormulaVariableRelsByVariableId(
+		variableId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelConstructorFormulaVariableRelFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelConstructorFormulaVariableRelConnection
+	formulaTeledeteccionsByFormulaId(
+		formulaId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelFormulaTeledeteccionFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelFormulaTeledeteccionConnection
+	formulaDeepLearningsByFormulaId(
+		formulaId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelFormulaDeepLearningFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelFormulaDeepLearningConnection
+	formulaHistorialsByFormulaId(
+		formulaId: ID!,
+		sortDirection: ModelSortDirection,
+		filter: ModelFormulaHistorialFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelFormulaHistorialConnection
+	formulaHistorialsByVersion(
+		version: Int!,
+		sortDirection: ModelSortDirection,
+		filter: ModelFormulaHistorialFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelFormulaHistorialConnection
+	formulaHistorialsByFechaModificacion(
+		fechaModificacion: AWSDateTime!,
+		sortDirection: ModelSortDirection,
+		filter: ModelFormulaHistorialFilterInput,
+		limit: Int,
+		nextToken: String
+	): ModelFormulaHistorialConnection
+}
+
+type Subscription {
+	onCreateSatelliteTopology(filter: ModelSubscriptionSatelliteTopologyFilterInput): SatelliteTopology
+		@aws_subscribe(mutations: ["createSatelliteTopology"])
+	onUpdateSatelliteTopology(filter: ModelSubscriptionSatelliteTopologyFilterInput): SatelliteTopology
+		@aws_subscribe(mutations: ["updateSatelliteTopology"])
+	onDeleteSatelliteTopology(filter: ModelSubscriptionSatelliteTopologyFilterInput): SatelliteTopology
+		@aws_subscribe(mutations: ["deleteSatelliteTopology"])
+	onCreateModelAI(filter: ModelSubscriptionModelAIFilterInput): ModelAI
+		@aws_subscribe(mutations: ["createModelAI"])
+	onUpdateModelAI(filter: ModelSubscriptionModelAIFilterInput): ModelAI
+		@aws_subscribe(mutations: ["updateModelAI"])
+	onDeleteModelAI(filter: ModelSubscriptionModelAIFilterInput): ModelAI
+		@aws_subscribe(mutations: ["deleteModelAI"])
+	onCreateSatelliteTopologyModelAI(filter: ModelSubscriptionSatelliteTopologyModelAIFilterInput): SatelliteTopologyModelAI
+		@aws_subscribe(mutations: ["createSatelliteTopologyModelAI"])
+	onUpdateSatelliteTopologyModelAI(filter: ModelSubscriptionSatelliteTopologyModelAIFilterInput): SatelliteTopologyModelAI
+		@aws_subscribe(mutations: ["updateSatelliteTopologyModelAI"])
+	onDeleteSatelliteTopologyModelAI(filter: ModelSubscriptionSatelliteTopologyModelAIFilterInput): SatelliteTopologyModelAI
+		@aws_subscribe(mutations: ["deleteSatelliteTopologyModelAI"])
+	onCreateCalculation(filter: ModelSubscriptionCalculationFilterInput): Calculation
+		@aws_subscribe(mutations: ["createCalculation"])
+	onUpdateCalculation(filter: ModelSubscriptionCalculationFilterInput): Calculation
+		@aws_subscribe(mutations: ["updateCalculation"])
+	onDeleteCalculation(filter: ModelSubscriptionCalculationFilterInput): Calculation
+		@aws_subscribe(mutations: ["deleteCalculation"])
+	onCreateUser(filter: ModelSubscriptionUserFilterInput): User
+		@aws_subscribe(mutations: ["createUser"])
+	onUpdateUser(filter: ModelSubscriptionUserFilterInput): User
+		@aws_subscribe(mutations: ["updateUser"])
+	onDeleteUser(filter: ModelSubscriptionUserFilterInput): User
+		@aws_subscribe(mutations: ["deleteUser"])
+	onCreateModelPackage(filter: ModelSubscriptionModelPackageFilterInput): ModelPackage
+		@aws_subscribe(mutations: ["createModelPackage"])
+	onUpdateModelPackage(filter: ModelSubscriptionModelPackageFilterInput): ModelPackage
+		@aws_subscribe(mutations: ["updateModelPackage"])
+	onDeleteModelPackage(filter: ModelSubscriptionModelPackageFilterInput): ModelPackage
+		@aws_subscribe(mutations: ["deleteModelPackage"])
+	onCreateUserModelPackage(filter: ModelSubscriptionUserModelPackageFilterInput): UserModelPackage
+		@aws_subscribe(mutations: ["createUserModelPackage"])
+	onUpdateUserModelPackage(filter: ModelSubscriptionUserModelPackageFilterInput): UserModelPackage
+		@aws_subscribe(mutations: ["updateUserModelPackage"])
+	onDeleteUserModelPackage(filter: ModelSubscriptionUserModelPackageFilterInput): UserModelPackage
+		@aws_subscribe(mutations: ["deleteUserModelPackage"])
+	onCreateProyecto(filter: ModelSubscriptionProyectoFilterInput): Proyecto
+		@aws_subscribe(mutations: ["createProyecto"])
+	onUpdateProyecto(filter: ModelSubscriptionProyectoFilterInput): Proyecto
+		@aws_subscribe(mutations: ["updateProyecto"])
+	onDeleteProyecto(filter: ModelSubscriptionProyectoFilterInput): Proyecto
+		@aws_subscribe(mutations: ["deleteProyecto"])
+	onCreateConsultaAnalisis(filter: ModelSubscriptionConsultaAnalisisFilterInput): ConsultaAnalisis
+		@aws_subscribe(mutations: ["createConsultaAnalisis"])
+	onUpdateConsultaAnalisis(filter: ModelSubscriptionConsultaAnalisisFilterInput): ConsultaAnalisis
+		@aws_subscribe(mutations: ["updateConsultaAnalisis"])
+	onDeleteConsultaAnalisis(filter: ModelSubscriptionConsultaAnalisisFilterInput): ConsultaAnalisis
+		@aws_subscribe(mutations: ["deleteConsultaAnalisis"])
+	onCreateConsultaEstado(filter: ModelSubscriptionConsultaEstadoFilterInput): ConsultaEstado
+		@aws_subscribe(mutations: ["createConsultaEstado"])
+	onUpdateConsultaEstado(filter: ModelSubscriptionConsultaEstadoFilterInput): ConsultaEstado
+		@aws_subscribe(mutations: ["updateConsultaEstado"])
+	onDeleteConsultaEstado(filter: ModelSubscriptionConsultaEstadoFilterInput): ConsultaEstado
+		@aws_subscribe(mutations: ["deleteConsultaEstado"])
+	onCreateAnalisisCuota(filter: ModelSubscriptionAnalisisCuotaFilterInput): AnalisisCuota
+		@aws_subscribe(mutations: ["createAnalisisCuota"])
+	onUpdateAnalisisCuota(filter: ModelSubscriptionAnalisisCuotaFilterInput): AnalisisCuota
+		@aws_subscribe(mutations: ["updateAnalisisCuota"])
+	onDeleteAnalisisCuota(filter: ModelSubscriptionAnalisisCuotaFilterInput): AnalisisCuota
+		@aws_subscribe(mutations: ["deleteAnalisisCuota"])
+	onCreateAnalisisCuotasUsoDiario(filter: ModelSubscriptionAnalisisCuotasUsoDiarioFilterInput): AnalisisCuotasUsoDiario
+		@aws_subscribe(mutations: ["createAnalisisCuotasUsoDiario"])
+	onUpdateAnalisisCuotasUsoDiario(filter: ModelSubscriptionAnalisisCuotasUsoDiarioFilterInput): AnalisisCuotasUsoDiario
+		@aws_subscribe(mutations: ["updateAnalisisCuotasUsoDiario"])
+	onDeleteAnalisisCuotasUsoDiario(filter: ModelSubscriptionAnalisisCuotasUsoDiarioFilterInput): AnalisisCuotasUsoDiario
+		@aws_subscribe(mutations: ["deleteAnalisisCuotasUsoDiario"])
+	onCreateDispositivoIot(filter: ModelSubscriptionDispositivoIotFilterInput): DispositivoIot
+		@aws_subscribe(mutations: ["createDispositivoIot"])
+	onUpdateDispositivoIot(filter: ModelSubscriptionDispositivoIotFilterInput): DispositivoIot
+		@aws_subscribe(mutations: ["updateDispositivoIot"])
+	onDeleteDispositivoIot(filter: ModelSubscriptionDispositivoIotFilterInput): DispositivoIot
+		@aws_subscribe(mutations: ["deleteDispositivoIot"])
+	onCreateGrupoIot(filter: ModelSubscriptionGrupoIotFilterInput): GrupoIot
+		@aws_subscribe(mutations: ["createGrupoIot"])
+	onUpdateGrupoIot(filter: ModelSubscriptionGrupoIotFilterInput): GrupoIot
+		@aws_subscribe(mutations: ["updateGrupoIot"])
+	onDeleteGrupoIot(filter: ModelSubscriptionGrupoIotFilterInput): GrupoIot
+		@aws_subscribe(mutations: ["deleteGrupoIot"])
+	onCreateRelDispositivoGrupoIot(filter: ModelSubscriptionRelDispositivoGrupoIotFilterInput): RelDispositivoGrupoIot
+		@aws_subscribe(mutations: ["createRelDispositivoGrupoIot"])
+	onUpdateRelDispositivoGrupoIot(filter: ModelSubscriptionRelDispositivoGrupoIotFilterInput): RelDispositivoGrupoIot
+		@aws_subscribe(mutations: ["updateRelDispositivoGrupoIot"])
+	onDeleteRelDispositivoGrupoIot(filter: ModelSubscriptionRelDispositivoGrupoIotFilterInput): RelDispositivoGrupoIot
+		@aws_subscribe(mutations: ["deleteRelDispositivoGrupoIot"])
+	onCreateRelGrupoIotProyecto(filter: ModelSubscriptionRelGrupoIotProyectoFilterInput): RelGrupoIotProyecto
+		@aws_subscribe(mutations: ["createRelGrupoIotProyecto"])
+	onUpdateRelGrupoIotProyecto(filter: ModelSubscriptionRelGrupoIotProyectoFilterInput): RelGrupoIotProyecto
+		@aws_subscribe(mutations: ["updateRelGrupoIotProyecto"])
+	onDeleteRelGrupoIotProyecto(filter: ModelSubscriptionRelGrupoIotProyectoFilterInput): RelGrupoIotProyecto
+		@aws_subscribe(mutations: ["deleteRelGrupoIotProyecto"])
+	onCreateMedicionIot(filter: ModelSubscriptionMedicionIotFilterInput): MedicionIot
+		@aws_subscribe(mutations: ["createMedicionIot"])
+	onUpdateMedicionIot(filter: ModelSubscriptionMedicionIotFilterInput): MedicionIot
+		@aws_subscribe(mutations: ["updateMedicionIot"])
+	onDeleteMedicionIot(filter: ModelSubscriptionMedicionIotFilterInput): MedicionIot
+		@aws_subscribe(mutations: ["deleteMedicionIot"])
+	onCreateProyectoLegacy(filter: ModelSubscriptionProyectoLegacyFilterInput): ProyectoLegacy
+		@aws_subscribe(mutations: ["createProyectoLegacy"])
+	onUpdateProyectoLegacy(filter: ModelSubscriptionProyectoLegacyFilterInput): ProyectoLegacy
+		@aws_subscribe(mutations: ["updateProyectoLegacy"])
+	onDeleteProyectoLegacy(filter: ModelSubscriptionProyectoLegacyFilterInput): ProyectoLegacy
+		@aws_subscribe(mutations: ["deleteProyectoLegacy"])
+	onCreateConsultaWeb(filter: ModelSubscriptionConsultaWebFilterInput): ConsultaWeb
+		@aws_subscribe(mutations: ["createConsultaWeb"])
+	onUpdateConsultaWeb(filter: ModelSubscriptionConsultaWebFilterInput): ConsultaWeb
+		@aws_subscribe(mutations: ["updateConsultaWeb"])
+	onDeleteConsultaWeb(filter: ModelSubscriptionConsultaWebFilterInput): ConsultaWeb
+		@aws_subscribe(mutations: ["deleteConsultaWeb"])
+	onCreateConsultaApi(filter: ModelSubscriptionConsultaApiFilterInput): ConsultaApi
+		@aws_subscribe(mutations: ["createConsultaApi"])
+	onUpdateConsultaApi(filter: ModelSubscriptionConsultaApiFilterInput): ConsultaApi
+		@aws_subscribe(mutations: ["updateConsultaApi"])
+	onDeleteConsultaApi(filter: ModelSubscriptionConsultaApiFilterInput): ConsultaApi
+		@aws_subscribe(mutations: ["deleteConsultaApi"])
+	onCreateIotSession(filter: ModelSubscriptionIotSessionFilterInput): IotSession
+		@aws_subscribe(mutations: ["createIotSession"])
+	onUpdateIotSession(filter: ModelSubscriptionIotSessionFilterInput): IotSession
+		@aws_subscribe(mutations: ["updateIotSession"])
+	onDeleteIotSession(filter: ModelSubscriptionIotSessionFilterInput): IotSession
+		@aws_subscribe(mutations: ["deleteIotSession"])
+	onCreateConstructorFormulaCategoria(filter: ModelSubscriptionConstructorFormulaCategoriaFilterInput): ConstructorFormulaCategoria
+		@aws_subscribe(mutations: ["createConstructorFormulaCategoria"])
+	onUpdateConstructorFormulaCategoria(filter: ModelSubscriptionConstructorFormulaCategoriaFilterInput): ConstructorFormulaCategoria
+		@aws_subscribe(mutations: ["updateConstructorFormulaCategoria"])
+	onDeleteConstructorFormulaCategoria(filter: ModelSubscriptionConstructorFormulaCategoriaFilterInput): ConstructorFormulaCategoria
+		@aws_subscribe(mutations: ["deleteConstructorFormulaCategoria"])
+	onCreateConstructorFormulaVariable(filter: ModelSubscriptionConstructorFormulaVariableFilterInput): ConstructorFormulaVariable
+		@aws_subscribe(mutations: ["createConstructorFormulaVariable"])
+	onUpdateConstructorFormulaVariable(filter: ModelSubscriptionConstructorFormulaVariableFilterInput): ConstructorFormulaVariable
+		@aws_subscribe(mutations: ["updateConstructorFormulaVariable"])
+	onDeleteConstructorFormulaVariable(filter: ModelSubscriptionConstructorFormulaVariableFilterInput): ConstructorFormulaVariable
+		@aws_subscribe(mutations: ["deleteConstructorFormulaVariable"])
+	onCreateConstructorFormula(filter: ModelSubscriptionConstructorFormulaFilterInput): ConstructorFormula
+		@aws_subscribe(mutations: ["createConstructorFormula"])
+	onUpdateConstructorFormula(filter: ModelSubscriptionConstructorFormulaFilterInput): ConstructorFormula
+		@aws_subscribe(mutations: ["updateConstructorFormula"])
+	onDeleteConstructorFormula(filter: ModelSubscriptionConstructorFormulaFilterInput): ConstructorFormula
+		@aws_subscribe(mutations: ["deleteConstructorFormula"])
+	onCreateConstructorFormulaVariableRel(filter: ModelSubscriptionConstructorFormulaVariableRelFilterInput): ConstructorFormulaVariableRel
+		@aws_subscribe(mutations: ["createConstructorFormulaVariableRel"])
+	onUpdateConstructorFormulaVariableRel(filter: ModelSubscriptionConstructorFormulaVariableRelFilterInput): ConstructorFormulaVariableRel
+		@aws_subscribe(mutations: ["updateConstructorFormulaVariableRel"])
+	onDeleteConstructorFormulaVariableRel(filter: ModelSubscriptionConstructorFormulaVariableRelFilterInput): ConstructorFormulaVariableRel
+		@aws_subscribe(mutations: ["deleteConstructorFormulaVariableRel"])
+	onCreateFormulaTeledeteccion(filter: ModelSubscriptionFormulaTeledeteccionFilterInput): FormulaTeledeteccion
+		@aws_subscribe(mutations: ["createFormulaTeledeteccion"])
+	onUpdateFormulaTeledeteccion(filter: ModelSubscriptionFormulaTeledeteccionFilterInput): FormulaTeledeteccion
+		@aws_subscribe(mutations: ["updateFormulaTeledeteccion"])
+	onDeleteFormulaTeledeteccion(filter: ModelSubscriptionFormulaTeledeteccionFilterInput): FormulaTeledeteccion
+		@aws_subscribe(mutations: ["deleteFormulaTeledeteccion"])
+	onCreateFormulaDeepLearning(filter: ModelSubscriptionFormulaDeepLearningFilterInput): FormulaDeepLearning
+		@aws_subscribe(mutations: ["createFormulaDeepLearning"])
+	onUpdateFormulaDeepLearning(filter: ModelSubscriptionFormulaDeepLearningFilterInput): FormulaDeepLearning
+		@aws_subscribe(mutations: ["updateFormulaDeepLearning"])
+	onDeleteFormulaDeepLearning(filter: ModelSubscriptionFormulaDeepLearningFilterInput): FormulaDeepLearning
+		@aws_subscribe(mutations: ["deleteFormulaDeepLearning"])
+	onCreateFormulaHistorial(filter: ModelSubscriptionFormulaHistorialFilterInput): FormulaHistorial
+		@aws_subscribe(mutations: ["createFormulaHistorial"])
+	onUpdateFormulaHistorial(filter: ModelSubscriptionFormulaHistorialFilterInput): FormulaHistorial
+		@aws_subscribe(mutations: ["updateFormulaHistorial"])
+	onDeleteFormulaHistorial(filter: ModelSubscriptionFormulaHistorialFilterInput): FormulaHistorial
+		@aws_subscribe(mutations: ["deleteFormulaHistorial"])
+	onCreateAccessDeadline(filter: ModelSubscriptionAccessDeadlineFilterInput): AccessDeadline
+		@aws_subscribe(mutations: ["createAccessDeadline"])
+	onUpdateAccessDeadline(filter: ModelSubscriptionAccessDeadlineFilterInput): AccessDeadline
+		@aws_subscribe(mutations: ["updateAccessDeadline"])
+	onDeleteAccessDeadline(filter: ModelSubscriptionAccessDeadlineFilterInput): AccessDeadline
+		@aws_subscribe(mutations: ["deleteAccessDeadline"])
+	onCreateRoutePermission(filter: ModelSubscriptionRoutePermissionFilterInput): RoutePermission
+		@aws_subscribe(mutations: ["createRoutePermission"])
+	onUpdateRoutePermission(filter: ModelSubscriptionRoutePermissionFilterInput): RoutePermission
+		@aws_subscribe(mutations: ["updateRoutePermission"])
+	onDeleteRoutePermission(filter: ModelSubscriptionRoutePermissionFilterInput): RoutePermission
+		@aws_subscribe(mutations: ["deleteRoutePermission"])
+	onCreateApiCredential(filter: ModelSubscriptionApiCredentialFilterInput): ApiCredential
+		@aws_subscribe(mutations: ["createApiCredential"])
+	onUpdateApiCredential(filter: ModelSubscriptionApiCredentialFilterInput): ApiCredential
+		@aws_subscribe(mutations: ["updateApiCredential"])
+	onDeleteApiCredential(filter: ModelSubscriptionApiCredentialFilterInput): ApiCredential
+		@aws_subscribe(mutations: ["deleteApiCredential"])
+	onCreatePermVersion(filter: ModelSubscriptionPermVersionFilterInput): PermVersion
+		@aws_subscribe(mutations: ["createPermVersion"])
+	onUpdatePermVersion(filter: ModelSubscriptionPermVersionFilterInput): PermVersion
+		@aws_subscribe(mutations: ["updatePermVersion"])
+	onDeletePermVersion(filter: ModelSubscriptionPermVersionFilterInput): PermVersion
+		@aws_subscribe(mutations: ["deletePermVersion"])
+	onCreateUnitOfMeasure(filter: ModelSubscriptionUnitOfMeasureFilterInput): UnitOfMeasure
+		@aws_subscribe(mutations: ["createUnitOfMeasure"])
+	onUpdateUnitOfMeasure(filter: ModelSubscriptionUnitOfMeasureFilterInput): UnitOfMeasure
+		@aws_subscribe(mutations: ["updateUnitOfMeasure"])
+	onDeleteUnitOfMeasure(filter: ModelSubscriptionUnitOfMeasureFilterInput): UnitOfMeasure
+		@aws_subscribe(mutations: ["deleteUnitOfMeasure"])
+	onCreateProject(filter: ModelSubscriptionProjectFilterInput): Project
+		@aws_subscribe(mutations: ["createProject"])
+	onUpdateProject(filter: ModelSubscriptionProjectFilterInput): Project
+		@aws_subscribe(mutations: ["updateProject"])
+	onDeleteProject(filter: ModelSubscriptionProjectFilterInput): Project
+		@aws_subscribe(mutations: ["deleteProject"])
+	onCreateTemplate(filter: ModelSubscriptionTemplateFilterInput): Template
+		@aws_subscribe(mutations: ["createTemplate"])
+	onUpdateTemplate(filter: ModelSubscriptionTemplateFilterInput): Template
+		@aws_subscribe(mutations: ["updateTemplate"])
+	onDeleteTemplate(filter: ModelSubscriptionTemplateFilterInput): Template
+		@aws_subscribe(mutations: ["deleteTemplate"])
+	onCreateTree(filter: ModelSubscriptionTreeFilterInput): Tree
+		@aws_subscribe(mutations: ["createTree"])
+	onUpdateTree(filter: ModelSubscriptionTreeFilterInput): Tree
+		@aws_subscribe(mutations: ["updateTree"])
+	onDeleteTree(filter: ModelSubscriptionTreeFilterInput): Tree
+		@aws_subscribe(mutations: ["deleteTree"])
+	onCreateTemplateFeature(filter: ModelSubscriptionTemplateFeatureFilterInput): TemplateFeature
+		@aws_subscribe(mutations: ["createTemplateFeature"])
+	onUpdateTemplateFeature(filter: ModelSubscriptionTemplateFeatureFilterInput): TemplateFeature
+		@aws_subscribe(mutations: ["updateTemplateFeature"])
+	onDeleteTemplateFeature(filter: ModelSubscriptionTemplateFeatureFilterInput): TemplateFeature
+		@aws_subscribe(mutations: ["deleteTemplateFeature"])
+	onCreateFeature(filter: ModelSubscriptionFeatureFilterInput): Feature
+		@aws_subscribe(mutations: ["createFeature"])
+	onUpdateFeature(filter: ModelSubscriptionFeatureFilterInput): Feature
+		@aws_subscribe(mutations: ["updateFeature"])
+	onDeleteFeature(filter: ModelSubscriptionFeatureFilterInput): Feature
+		@aws_subscribe(mutations: ["deleteFeature"])
+	onCreateRawData(filter: ModelSubscriptionRawDataFilterInput): RawData
+		@aws_subscribe(mutations: ["createRawData"])
+	onUpdateRawData(filter: ModelSubscriptionRawDataFilterInput): RawData
+		@aws_subscribe(mutations: ["updateRawData"])
+	onDeleteRawData(filter: ModelSubscriptionRawDataFilterInput): RawData
+		@aws_subscribe(mutations: ["deleteRawData"])
+	onCreateTopology(filter: ModelSubscriptionTopologyFilterInput): Topology
+		@aws_subscribe(mutations: ["createTopology"])
+	onUpdateTopology(filter: ModelSubscriptionTopologyFilterInput): Topology
+		@aws_subscribe(mutations: ["updateTopology"])
+	onDeleteTopology(filter: ModelSubscriptionTopologyFilterInput): Topology
+		@aws_subscribe(mutations: ["deleteTopology"])
+	onCreateTopologyTree(filter: ModelSubscriptionTopologyTreeFilterInput): TopologyTree
+		@aws_subscribe(mutations: ["createTopologyTree"])
+	onUpdateTopologyTree(filter: ModelSubscriptionTopologyTreeFilterInput): TopologyTree
+		@aws_subscribe(mutations: ["updateTopologyTree"])
+	onDeleteTopologyTree(filter: ModelSubscriptionTopologyTreeFilterInput): TopologyTree
+		@aws_subscribe(mutations: ["deleteTopologyTree"])
+}

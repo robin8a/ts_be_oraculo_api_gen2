@@ -1,0 +1,792 @@
+{
+    "success": true,
+    "satellites": {
+        "LC08": {
+            "id": "LC08",
+            "name": "LANDSAT_8",
+            "display_name": "Landsat 8",
+            "collection_name": "LANDSAT/LC08/C02/T1",
+            "default_bands": [
+                "B4",
+                "B3",
+                "B2"
+            ],
+            "vis_params": {
+                "min": 0.0,
+                "max": 30000.0
+            },
+            "supports_iot": true,
+            "bands": [
+                {
+                    "id": "B1",
+                    "name": "Banda B1",
+                    "tooltip_title": "B1 - Coastal aerosol",
+                    "tooltip_body": "0.43 - 0.45 μm<br />30 meters",
+                    "order": 1
+                },
+                {
+                    "id": "B2",
+                    "name": "Banda B2",
+                    "tooltip_title": "B2 - Blue",
+                    "tooltip_body": "0.45 - 0.51 μm<br />30 meters",
+                    "order": 2
+                },
+                {
+                    "id": "B3",
+                    "name": "Banda B3",
+                    "tooltip_title": "B3 - Green",
+                    "tooltip_body": "0.53 - 0.59 μm<br />30 meters",
+                    "order": 3
+                },
+                {
+                    "id": "B4",
+                    "name": "Banda B4",
+                    "tooltip_title": "B4 - Red",
+                    "tooltip_body": "0.64 - 0.67 μm<br />30 meters",
+                    "order": 4
+                },
+                {
+                    "id": "B5",
+                    "name": "Banda B5",
+                    "tooltip_title": "B5 - Near infrared",
+                    "tooltip_body": "0.85 - 0.88 μm<br />30 meters",
+                    "order": 5
+                },
+                {
+                    "id": "B6",
+                    "name": "Banda B6",
+                    "tooltip_title": "B6 - Shortwave infrared 1",
+                    "tooltip_body": "1.57 - 1.65 μm<br />30 meters",
+                    "order": 6
+                },
+                {
+                    "id": "B7",
+                    "name": "Banda B7",
+                    "tooltip_title": "B7 - Shortwave infrared 2",
+                    "tooltip_body": "2.11 - 2.29 μm<br />30 meters",
+                    "order": 7
+                },
+                {
+                    "id": "B8",
+                    "name": "Banda B8",
+                    "tooltip_title": "B8 - Band 8 Panchromatic",
+                    "tooltip_body": "0.52 - 0.90 μm<br />15 meters",
+                    "order": 8
+                },
+                {
+                    "id": "B9",
+                    "name": "Banda B9",
+                    "tooltip_title": "B9 - Cirrus",
+                    "tooltip_body": "1.36 - 1.38 μm<br />30 meters",
+                    "order": 9
+                },
+                {
+                    "id": "B10",
+                    "name": "Banda B10",
+                    "tooltip_title": "B10 - Thermal infrared 1",
+                    "tooltip_body": "10.60 - 11.19 μm<br />30 meters",
+                    "order": 10
+                },
+                {
+                    "id": "B11",
+                    "name": "Banda B11",
+                    "tooltip_title": "B11 - Thermal infrared 2",
+                    "tooltip_body": "11.50 - 12.51 μm<br />30 meters",
+                    "order": 11
+                },
+                {
+                    "id": "QA_PIXEL",
+                    "name": "QA_PIXEL",
+                    "tooltip_title": "QA_PIXEL - Landsat Collection 2 QA Bitmask",
+                    "tooltip_body": "30 meters",
+                    "order": 12
+                }
+            ]
+        },
+        "LC09": {
+            "id": "LC09",
+            "name": "LANDSAT_9",
+            "display_name": "Landsat 9",
+            "collection_name": "LANDSAT/LC09/C02/T1",
+            "default_bands": [
+                "B4",
+                "B3",
+                "B2"
+            ],
+            "vis_params": {
+                "min": 0.0,
+                "max": 30000.0
+            },
+            "supports_iot": true,
+            "bands": [
+                {
+                    "id": "B1",
+                    "name": "Banda B1",
+                    "tooltip_title": "B1 - Coastal aerosol",
+                    "tooltip_body": "0.43 - 0.45 μm<br />30 meters",
+                    "order": 1
+                },
+                {
+                    "id": "B2",
+                    "name": "Banda B2",
+                    "tooltip_title": "B2 - Blue",
+                    "tooltip_body": "0.45 - 0.51 μm<br />30 meters",
+                    "order": 2
+                },
+                {
+                    "id": "B3",
+                    "name": "Banda B3",
+                    "tooltip_title": "B3 - Green",
+                    "tooltip_body": "0.53 - 0.59 μm<br />30 meters",
+                    "order": 3
+                },
+                {
+                    "id": "B4",
+                    "name": "Banda B4",
+                    "tooltip_title": "B4 - Red",
+                    "tooltip_body": "0.64 - 0.67 μm<br />30 meters",
+                    "order": 4
+                },
+                {
+                    "id": "B5",
+                    "name": "Banda B5",
+                    "tooltip_title": "B5 - Near infrared",
+                    "tooltip_body": "0.85 - 0.88 μm<br />30 meters",
+                    "order": 5
+                },
+                {
+                    "id": "B6",
+                    "name": "Banda B6",
+                    "tooltip_title": "B6 - Shortwave infrared 1",
+                    "tooltip_body": "1.57 - 1.65 μm<br />30 meters",
+                    "order": 6
+                },
+                {
+                    "id": "B7",
+                    "name": "Banda B7",
+                    "tooltip_title": "B7 - Shortwave infrared 2",
+                    "tooltip_body": "2.11 - 2.29 μm<br />30 meters",
+                    "order": 7
+                },
+                {
+                    "id": "B8",
+                    "name": "Banda B8",
+                    "tooltip_title": "B8 - Band 8 Panchromatic",
+                    "tooltip_body": "0.52 - 0.90 μm<br />15 meters",
+                    "order": 8
+                },
+                {
+                    "id": "B9",
+                    "name": "Banda B9",
+                    "tooltip_title": "B9 - Cirrus",
+                    "tooltip_body": "1.36 - 1.38 μm<br />30 meters",
+                    "order": 9
+                },
+                {
+                    "id": "B10",
+                    "name": "Banda B10",
+                    "tooltip_title": "B10 - Thermal infrared 1",
+                    "tooltip_body": "10.60 - 11.19 μm<br />30 meters",
+                    "order": 10
+                },
+                {
+                    "id": "B11",
+                    "name": "Banda B11",
+                    "tooltip_title": "B11 - Thermal infrared 2",
+                    "tooltip_body": "11.50 - 12.51 μm<br />30 meters",
+                    "order": 11
+                },
+                {
+                    "id": "QA_PIXEL",
+                    "name": "QA_PIXEL",
+                    "tooltip_title": "QA_PIXEL - Landsat Collection 2 QA Bitmask",
+                    "tooltip_body": "30 meters",
+                    "order": 12
+                }
+            ]
+        },
+        "S2": {
+            "id": "S2",
+            "name": "SENTINEL2_SR",
+            "display_name": "Sentinel 2",
+            "collection_name": "COPERNICUS/S2_SR_HARMONIZED",
+            "default_bands": [
+                "B4",
+                "B3",
+                "B2"
+            ],
+            "vis_params": {
+                "min": 0.0,
+                "max": 30000.0
+            },
+            "supports_iot": true,
+            "bands": [
+                {
+                    "id": "B1",
+                    "name": "Banda B1",
+                    "tooltip_title": "B1 - Aerosols",
+                    "tooltip_body": "443.9nm (S2A) / 442.3nm (S2B)<br />60 meters",
+                    "order": 1
+                },
+                {
+                    "id": "B2",
+                    "name": "Banda B2",
+                    "tooltip_title": "B2 - Blue",
+                    "tooltip_body": "496.6nm (S2A) / 492.1nm (S2B)<br />10 meters",
+                    "order": 2
+                },
+                {
+                    "id": "B3",
+                    "name": "Banda B3",
+                    "tooltip_title": "B3 - Green",
+                    "tooltip_body": "560nm (S2A) / 559nm (S2B)<br />10 meters",
+                    "order": 3
+                },
+                {
+                    "id": "B4",
+                    "name": "Banda B4",
+                    "tooltip_title": "B4 - Red",
+                    "tooltip_body": "664.5nm (S2A) / 665nm (S2B)<br />10 meters",
+                    "order": 4
+                },
+                {
+                    "id": "B5",
+                    "name": "Banda B5",
+                    "tooltip_title": "B5 - Red Edge 1",
+                    "tooltip_body": "703.9nm (S2A) / 703.8nm (S2B)<br />20 meters",
+                    "order": 5
+                },
+                {
+                    "id": "B6",
+                    "name": "Banda B6",
+                    "tooltip_title": "B6 - Red Edge 2",
+                    "tooltip_body": "740.2nm (S2A) / 739.1nm (S2B)<br />20 meters",
+                    "order": 6
+                },
+                {
+                    "id": "B7",
+                    "name": "Banda B7",
+                    "tooltip_title": "B7 - Red Edge 3",
+                    "tooltip_body": "782.5nm (S2A) / 779.7nm (S2B)<br />20 meters",
+                    "order": 7
+                },
+                {
+                    "id": "B8",
+                    "name": "Banda B8",
+                    "tooltip_title": "B8 - NIR",
+                    "tooltip_body": "835.1nm (S2A) / 833nm (S2B)<br />10 meters",
+                    "order": 8
+                },
+                {
+                    "id": "B8A",
+                    "name": "Banda B8A",
+                    "tooltip_title": "B8A - Red Edge 4",
+                    "tooltip_body": "864.8nm (S2A) / 864nm (S2B)<br />20 meters",
+                    "order": 9
+                },
+                {
+                    "id": "B9",
+                    "name": "Banda B9",
+                    "tooltip_title": "B9 - Water vapor",
+                    "tooltip_body": "945nm (S2A) / 943.2nm (S2B)<br />60 meters",
+                    "order": 10
+                },
+                {
+                    "id": "B11",
+                    "name": "Banda B11",
+                    "tooltip_title": "B11 - SWIR 1",
+                    "tooltip_body": "1613.7nm (S2A) / 1610.4nm (S2B)<br />20 meters",
+                    "order": 11
+                },
+                {
+                    "id": "B12",
+                    "name": "Banda B12",
+                    "tooltip_title": "B12 - SWIR 2",
+                    "tooltip_body": "2202.4nm (S2A) / 2185.7nm (S2B)<br />20 meters",
+                    "order": 12
+                },
+                {
+                    "id": "AOT",
+                    "name": "AOT",
+                    "tooltip_title": "AOT - Aerosol Optical Thickness",
+                    "tooltip_body": "10 meters",
+                    "order": 13
+                },
+                {
+                    "id": "WVP",
+                    "name": "WVP",
+                    "tooltip_title": "WVP - Water Vapor Pressure",
+                    "tooltip_body": "10 meters",
+                    "order": 14
+                },
+                {
+                    "id": "SCL",
+                    "name": "SCL",
+                    "tooltip_title": "SCL - Scene Classification Map",
+                    "tooltip_body": "20 meters",
+                    "order": 15
+                },
+                {
+                    "id": "TCI_R",
+                    "name": "TCI_R",
+                    "tooltip_title": "TCI_R - True Color Image, Red channel",
+                    "tooltip_body": "10 meters",
+                    "order": 16
+                },
+                {
+                    "id": "TCI_G",
+                    "name": "TCI_G",
+                    "tooltip_title": "TCI_G - True Color Image, Green channel",
+                    "tooltip_body": "10 meters",
+                    "order": 17
+                },
+                {
+                    "id": "TCI_B",
+                    "name": "TCI_B",
+                    "tooltip_title": "TCI_B - True Color Image, Blue channel",
+                    "tooltip_body": "10 meters",
+                    "order": 18
+                },
+                {
+                    "id": "MSK_CLDPRB",
+                    "name": "MSK_CLDPRB",
+                    "tooltip_title": "MSK_CLDPRB - Cloud Probability Map",
+                    "tooltip_body": "20 meters",
+                    "order": 19
+                },
+                {
+                    "id": "MSK_SNWPRB",
+                    "name": "MSK_SNWPRB",
+                    "tooltip_title": "MSK_SNWPRB - Snow Probability Map",
+                    "tooltip_body": "10 meters",
+                    "order": 20
+                },
+                {
+                    "id": "QA10",
+                    "name": "QA10",
+                    "tooltip_title": "QA10",
+                    "tooltip_body": "Always empty<br />10 meters",
+                    "order": 21
+                },
+                {
+                    "id": "QA20",
+                    "name": "QA20",
+                    "tooltip_title": "QA20",
+                    "tooltip_body": "Always empty<br />20 meters",
+                    "order": 22
+                },
+                {
+                    "id": "QA60",
+                    "name": "QA60",
+                    "tooltip_title": "QA60",
+                    "tooltip_body": "Cloud mask<br />60 meters",
+                    "order": 23
+                }
+            ]
+        },
+        "S1": {
+            "id": "S1",
+            "name": "SENTINEL1_GRD",
+            "display_name": "Sentinel 1",
+            "collection_name": "COPERNICUS/S1_GRD",
+            "default_bands": [
+                "VV"
+            ],
+            "vis_params": {
+                "min": -25,
+                "max": 5
+            },
+            "supports_iot": false,
+            "bands": [
+                {
+                    "id": "VV",
+                    "name": "VV",
+                    "tooltip_title": "VV - Vertical transmit/Vertical receive",
+                    "tooltip_body": "C-band SAR<br />10 meters",
+                    "order": 1
+                },
+                {
+                    "id": "VH",
+                    "name": "VH",
+                    "tooltip_title": "VH - Vertical transmit/Horizontal receive",
+                    "tooltip_body": "C-band SAR<br />10 meters",
+                    "order": 2
+                },
+                {
+                    "id": "HH",
+                    "name": "HH",
+                    "tooltip_title": "HH - Horizontal transmit/Horizontal receive",
+                    "tooltip_body": "C-band SAR<br />10 meters",
+                    "order": 3
+                },
+                {
+                    "id": "HV",
+                    "name": "HV",
+                    "tooltip_title": "HV - Horizontal transmit/Vertical receive",
+                    "tooltip_body": "C-band SAR<br />10 meters",
+                    "order": 4
+                },
+                {
+                    "id": "angle",
+                    "name": "Angle",
+                    "tooltip_title": "Angle - Local incidence angle",
+                    "tooltip_body": "Degrees<br />10 meters",
+                    "order": 5
+                }
+            ]
+        },
+        "ALOS": {
+            "id": "ALOS",
+            "name": "ALOS_PALSAR",
+            "display_name": "ALOS PALSAR",
+            "collection_name": "JAXA/ALOS/PALSAR/YEARLY/SAR",
+            "default_bands": [
+                "HH",
+                "HV"
+            ],
+            "vis_params": {
+                "min": 0.0,
+                "max": 10000.0
+            },
+            "supports_iot": false,
+            "bands": [
+                {
+                    "id": "HH",
+                    "name": "HH",
+                    "tooltip_title": "HH - Horizontal transmit/Horizontal receive",
+                    "tooltip_body": "L-band SAR<br />25 meters",
+                    "order": 1
+                },
+                {
+                    "id": "HV",
+                    "name": "HV",
+                    "tooltip_title": "HV - Horizontal transmit/Vertical receive",
+                    "tooltip_body": "L-band SAR<br />25 meters",
+                    "order": 2
+                },
+                {
+                    "id": "angle",
+                    "name": "Angle",
+                    "tooltip_title": "Angle - Local incidence angle",
+                    "tooltip_body": "Degrees<br />25 meters",
+                    "order": 3
+                },
+                {
+                    "id": "date",
+                    "name": "Date",
+                    "tooltip_title": "Date - Observation date",
+                    "tooltip_body": "Days since Jan 1, 1970",
+                    "order": 4
+                },
+                {
+                    "id": "qa",
+                    "name": "QA",
+                    "tooltip_title": "QA - Quality Assessment",
+                    "tooltip_body": "Processing information",
+                    "order": 5
+                }
+            ]
+        },
+        "MOD13A1": {
+            "id": "MOD13A1",
+            "name": "MODIS_MOD13A1",
+            "display_name": "MODIS MOD13A1 - Vegetation Indices",
+            "collection_name": "MODIS/061/MOD13A1",
+            "default_bands": [
+                "NDVI"
+            ],
+            "vis_params": {
+                "min": -2000,
+                "max": 10000,
+                "palette": [
+                    "FFFFFF",
+                    "CE7E45",
+                    "DF923D",
+                    "F1B555",
+                    "FCD163",
+                    "99B718",
+                    "74A901",
+                    "66A000",
+                    "529400",
+                    "3E8601",
+                    "207401",
+                    "056201",
+                    "004C00",
+                    "023B01",
+                    "012E01",
+                    "011D01",
+                    "011301"
+                ]
+            },
+            "supports_iot": true,
+            "bands": [
+                {
+                    "id": "NDVI",
+                    "name": "NDVI",
+                    "tooltip_title": "NDVI - Normalized Difference Vegetation Index",
+                    "tooltip_body": "Range: -2000 to 10000<br />Scale: 0.0001<br />500 meters",
+                    "order": 1
+                },
+                {
+                    "id": "EVI",
+                    "name": "EVI",
+                    "tooltip_title": "EVI - Enhanced Vegetation Index",
+                    "tooltip_body": "Range: -2000 to 10000<br />Scale: 0.0001<br />500 meters",
+                    "order": 2
+                },
+                {
+                    "id": "DetailedQA",
+                    "name": "DetailedQA",
+                    "tooltip_title": "DetailedQA - Detailed Quality Assessment",
+                    "tooltip_body": "Quality assessment flags<br />500 meters",
+                    "order": 3
+                },
+                {
+                    "id": "sur_refl_b01",
+                    "name": "Red",
+                    "tooltip_title": "Red - Red Reflectance",
+                    "tooltip_body": "Range: 0 to 10000<br />Scale: 0.0001<br />500 meters",
+                    "order": 4
+                },
+                {
+                    "id": "sur_refl_b02",
+                    "name": "NIR",
+                    "tooltip_title": "NIR - Near Infrared Reflectance",
+                    "tooltip_body": "Range: 0 to 10000<br />Scale: 0.0001<br />500 meters",
+                    "order": 5
+                },
+                {
+                    "id": "sur_refl_b03",
+                    "name": "Blue",
+                    "tooltip_title": "Blue - Blue Reflectance",
+                    "tooltip_body": "Range: 0 to 10000<br />Scale: 0.0001<br />500 meters",
+                    "order": 6
+                },
+                {
+                    "id": "sur_refl_b07",
+                    "name": "MIR",
+                    "tooltip_title": "MIR - Middle Infrared Reflectance",
+                    "tooltip_body": "Range: 0 to 10000<br />Scale: 0.0001<br />500 meters",
+                    "order": 7
+                },
+                {
+                    "id": "ViewZenith",
+                    "name": "ViewZenith",
+                    "tooltip_title": "ViewZenith - View Zenith Angle",
+                    "tooltip_body": "Range: -9000 to 9000<br />Scale: 0.01<br />500 meters",
+                    "order": 8
+                },
+                {
+                    "id": "SolarZenith",
+                    "name": "SolarZenith",
+                    "tooltip_title": "SolarZenith - Solar Zenith Angle",
+                    "tooltip_body": "Range: -9000 to 9000<br />Scale: 0.01<br />500 meters",
+                    "order": 9
+                },
+                {
+                    "id": "RelativeAzimuth",
+                    "name": "RelativeAzimuth",
+                    "tooltip_title": "RelativeAzimuth - Relative Azimuth Angle",
+                    "tooltip_body": "Range: -18000 to 18000<br />Scale: 0.01<br />500 meters",
+                    "order": 10
+                },
+                {
+                    "id": "DayOfYear",
+                    "name": "DayOfYear",
+                    "tooltip_title": "DayOfYear - Composite Day of the Year",
+                    "tooltip_body": "Day of year<br />500 meters",
+                    "order": 11
+                },
+                {
+                    "id": "SummaryQA",
+                    "name": "SummaryQA",
+                    "tooltip_title": "SummaryQA - Pixel Reliability Summary",
+                    "tooltip_body": "Reliability flags: 0=Good, 1=Marginal, 2=Snow/Ice, 3=Cloudy<br />500 meters",
+                    "order": 12
+                }
+            ]
+        },
+        "MOD11A1": {
+            "id": "MOD11A1",
+            "name": "MODIS_MOD11A1",
+            "display_name": "MODIS MOD11A1 - Land Surface Temperature",
+            "collection_name": "MODIS/061/MOD11A1",
+            "default_bands": [
+                "LST_Day_1km"
+            ],
+            "vis_params": {
+                "min": 13000,
+                "max": 16500,
+                "palette": [
+                    "040274",
+                    "040281",
+                    "0502a3",
+                    "0502b8",
+                    "0502ce",
+                    "0502e6",
+                    "0602ff",
+                    "235cb1",
+                    "307ef3",
+                    "269db1",
+                    "30c8e2",
+                    "32d3ef",
+                    "3be285",
+                    "3ff38f",
+                    "86e26f",
+                    "3ae237",
+                    "b5e22e",
+                    "d6e21f",
+                    "fff705",
+                    "ffd611",
+                    "ffb613",
+                    "ff8b13",
+                    "ff6e08",
+                    "ff500d",
+                    "ff0000",
+                    "de0101",
+                    "c21301",
+                    "a71001",
+                    "911003"
+                ]
+            },
+            "supports_iot": true,
+            "bands": [
+                {
+                    "id": "LST_Day_1km",
+                    "name": "LST_Day_1km",
+                    "tooltip_title": "LST_Day_1km - Daytime Land Surface Temperature",
+                    "tooltip_body": "Range: 7500 to 65535<br />Scale: 0.02 K<br />1 km",
+                    "order": 1
+                },
+                {
+                    "id": "LST_Night_1km",
+                    "name": "LST_Night_1km",
+                    "tooltip_title": "LST_Night_1km - Nighttime Land Surface Temperature",
+                    "tooltip_body": "Range: 7500 to 65535<br />Scale: 0.02 K<br />1 km",
+                    "order": 2
+                },
+                {
+                    "id": "QC_Day",
+                    "name": "QC_Day",
+                    "tooltip_title": "QC_Day - Day Quality Control",
+                    "tooltip_body": "Quality flags<br />1 km",
+                    "order": 3
+                },
+                {
+                    "id": "QC_Night",
+                    "name": "QC_Night",
+                    "tooltip_title": "QC_Night - Night Quality Control",
+                    "tooltip_body": "Quality flags<br />1 km",
+                    "order": 4
+                },
+                {
+                    "id": "Day_view_time",
+                    "name": "Day_view_time",
+                    "tooltip_title": "Day_view_time - Day View Time",
+                    "tooltip_body": "Local time of observation<br />1 km",
+                    "order": 5
+                },
+                {
+                    "id": "Day_view_angle",
+                    "name": "Day_view_angle",
+                    "tooltip_title": "Day_view_angle - Day View Angle",
+                    "tooltip_body": "View zenith angle<br />1 km",
+                    "order": 6
+                },
+                {
+                    "id": "Night_view_time",
+                    "name": "Night_view_time",
+                    "tooltip_title": "Night_view_time - Night View Time",
+                    "tooltip_body": "Local time of observation<br />1 km",
+                    "order": 7
+                },
+                {
+                    "id": "Night_view_angle",
+                    "name": "Night_view_angle",
+                    "tooltip_title": "Night_view_angle - Night View Angle",
+                    "tooltip_body": "View zenith angle<br />1 km",
+                    "order": 8
+                },
+                {
+                    "id": "Emis_31",
+                    "name": "Emis_31",
+                    "tooltip_title": "Emis_31 - Emissivity Band 31",
+                    "tooltip_body": "Range: 0 to 10000<br />Scale: 0.002<br />1 km",
+                    "order": 9
+                },
+                {
+                    "id": "Emis_32",
+                    "name": "Emis_32",
+                    "tooltip_title": "Emis_32 - Emissivity Band 32",
+                    "tooltip_body": "Range: 0 to 10000<br />Scale: 0.002<br />1 km",
+                    "order": 10
+                },
+                {
+                    "id": "Clear_day_cov",
+                    "name": "Clear_day_cov",
+                    "tooltip_title": "Clear_day_cov - Clear Sky Coverage Day",
+                    "tooltip_body": "Percentage<br />1 km",
+                    "order": 11
+                },
+                {
+                    "id": "Clear_night_cov",
+                    "name": "Clear_night_cov",
+                    "tooltip_title": "Clear_night_cov - Clear Sky Coverage Night",
+                    "tooltip_body": "Percentage<br />1 km",
+                    "order": 12
+                }
+            ]
+        },
+        "MOD14A1": {
+            "id": "MOD14A1",
+            "name": "MODIS_MOD14A1",
+            "display_name": "MODIS MOD14A1 - Thermal Anomalies & Fire",
+            "collection_name": "MODIS/061/MOD14A1",
+            "default_bands": [
+                "FireMask"
+            ],
+            "vis_params": {
+                "min": 0,
+                "max": 9,
+                "palette": [
+                    "000000",
+                    "006400",
+                    "00ff00",
+                    "ffff00",
+                    "ff0000"
+                ]
+            },
+            "supports_iot": false,
+            "bands": [
+                {
+                    "id": "FireMask",
+                    "name": "FireMask",
+                    "tooltip_title": "FireMask - Fire Mask",
+                    "tooltip_body": "Fire detection flags<br />1 km",
+                    "order": 1
+                },
+                {
+                    "id": "MaxFRP",
+                    "name": "MaxFRP",
+                    "tooltip_title": "MaxFRP - Maximum Fire Radiative Power",
+                    "tooltip_body": "MW<br />1 km",
+                    "order": 2
+                },
+                {
+                    "id": "sample",
+                    "name": "sample",
+                    "tooltip_title": "sample - Sample Coordinate",
+                    "tooltip_body": "Pixel coordinate<br />1 km",
+                    "order": 3
+                },
+                {
+                    "id": "QA",
+                    "name": "QA",
+                    "tooltip_title": "QA - Quality Assurance",
+                    "tooltip_body": "Quality flags<br />1 km",
+                    "order": 4
+                }
+            ]
+        }
+    }
+}
